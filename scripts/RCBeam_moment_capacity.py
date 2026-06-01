@@ -503,6 +503,13 @@ def design_beam(name, b, h, p, dl, dt, f_c, f_yl, f_yt, M_ue, V_ue,
     xx_dis = (b - 2 * p - dt * 2 - dl) / (n - 1) if n > 1 else 0
     layering_required = xx_dis < MINIMUM_SPACING if n > 1 else False
 
+    # Warn if bar spacing is insufficient (ACI 318-14 Section 25.2.1)
+    if layering_required and n > 1:
+        print(f"\n  ⚠ WARNING: Bar clear spacing = {xx_dis:.1f} mm < {MINIMUM_SPACING} mm minimum!")
+        print(f"    Section: {b:.0f} mm x {h:.0f} mm with {int(n)} bars O{dl:.0f} mm.")
+        print(f"    Consider: using smaller bar diameter, increasing section width,")
+        print(f"    or arranging bars in multiple layers (not yet implemented).\n")
+
     # -----------------------------------------------------------------------
     #  Deflection check (ACI 318-14 Section 24.2)
     # -----------------------------------------------------------------------
