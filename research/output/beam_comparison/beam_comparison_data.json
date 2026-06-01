@@ -8,7 +8,7 @@
     "section": {
       "b_mm": 300.0,
       "h_mm": 700.0,
-      "d_mm": 640.0,
+      "d_mm": 639.4,
       "fc_MPa": 28.0,
       "fy_MPa": 420.0,
       "fyt_MPa": 280.0
@@ -19,16 +19,16 @@
       "span_m": 6.0
     },
     "python_results": {
-      "phiMn_kNm": 286.44935336793344,
-      "flexure_DCR": 0.7854791688462844,
-      "phiVn_kN": 195.50942991510803,
-      "shear_DCR": 0.7672264200511012,
-      "As_mm2": 1256.6370614359173,
-      "Asp_mm2": 942.4777960769379,
-      "n_bars": 4,
-      "n_compression_bars": 3,
-      "stirrup_spacing_mm": 320.0,
-      "deflection_mm": 5.1317930818969,
+      "phiMn_kNm": 265.6690758009538,
+      "flexure_DCR": 0.8469182923215943,
+      "phiVn_kN": 190.8186371563549,
+      "shear_DCR": 0.7860867378331158,
+      "As_mm2": 1161.2268925463952,
+      "Asp_mm2": 774.1512616975967,
+      "n_bars": 3,
+      "n_compression_bars": 2,
+      "stirrup_spacing_mm": 310.0,
+      "deflection_mm": 5.2845921482760225,
       "deflection_allowable_mm": 25.0,
       "deflection_adequate": true,
       "shear_reinforcement_required": true
@@ -51,7 +51,7 @@
     "section": {
       "b_mm": 300.0,
       "h_mm": 700.0,
-      "d_mm": 640.0,
+      "d_mm": 639.4,
       "fc_MPa": 28.0,
       "fy_MPa": 420.0,
       "fyt_MPa": 280.0
@@ -62,16 +62,16 @@
       "span_m": 6.0
     },
     "python_results": {
-      "phiMn_kNm": 286.44935336793344,
-      "flexure_DCR": 0.9033010441732272,
-      "phiVn_kN": 195.50942991510803,
-      "shear_DCR": 0.8823103830587664,
-      "As_mm2": 1256.6370614359173,
-      "Asp_mm2": 942.4777960769379,
-      "n_bars": 4,
-      "n_compression_bars": 3,
-      "stirrup_spacing_mm": 320.0,
-      "deflection_mm": 5.1317930818969,
+      "phiMn_kNm": 265.6690758009538,
+      "flexure_DCR": 0.9739560361698335,
+      "phiVn_kN": 190.8186371563549,
+      "shear_DCR": 0.9039997485080832,
+      "As_mm2": 1161.2268925463952,
+      "Asp_mm2": 774.1512616975967,
+      "n_bars": 3,
+      "n_compression_bars": 2,
+      "stirrup_spacing_mm": 310.0,
+      "deflection_mm": 5.2845921482760225,
       "deflection_allowable_mm": 25.0,
       "deflection_adequate": true,
       "shear_reinforcement_required": true
@@ -94,7 +94,7 @@
     "section": {
       "b_mm": 300.0,
       "h_mm": 700.0,
-      "d_mm": 640.0,
+      "d_mm": 639.4,
       "fc_MPa": 28.0,
       "fy_MPa": 420.0,
       "fyt_MPa": 280.0
@@ -105,16 +105,16 @@
       "span_m": 6.0
     },
     "python_results": {
-      "phiMn_kNm": 352.57535279284065,
-      "flexure_DCR": 0.8296098910006947,
-      "phiVn_kN": 195.50942991510803,
-      "shear_DCR": 0.9973943460664315,
-      "As_mm2": 1570.7963267948965,
-      "Asp_mm2": 942.4777960769379,
-      "n_bars": 5,
-      "n_compression_bars": 3,
-      "stirrup_spacing_mm": 320.0,
-      "deflection_mm": 5.022349842337114,
+      "phiMn_kNm": 347.56251538587605,
+      "flexure_DCR": 0.8415752189940744,
+      "phiVn_kN": 195.05340218751422,
+      "shear_DCR": 0.9997262176054592,
+      "As_mm2": 1548.3025233951935,
+      "Asp_mm2": 774.1512616975967,
+      "n_bars": 4,
+      "n_compression_bars": 2,
+      "stirrup_spacing_mm": 290.0,
+      "deflection_mm": 5.143743105161245,
       "deflection_allowable_mm": 25.0,
       "deflection_adequate": true,
       "shear_reinforcement_required": true
@@ -137,7 +137,7 @@
     "section": {
       "b_mm": 300.0,
       "h_mm": 700.0,
-      "d_mm": 640.0,
+      "d_mm": 639.4,
       "fc_MPa": 28.0,
       "fy_MPa": 420.0,
       "fyt_MPa": 280.0
@@ -148,16 +148,16 @@
       "span_m": 6.0
     },
     "python_results": {
-      "phiMn_kNm": 352.57535279284065,
-      "flexure_DCR": 0.9253341091930826,
-      "phiVn_kN": 217.50057849023662,
-      "shear_DCR": 0.9999973402818483,
-      "As_mm2": 1570.7963267948965,
-      "Asp_mm2": 942.4777960769379,
-      "n_bars": 5,
-      "n_compression_bars": 3,
-      "stirrup_spacing_mm": 240.0,
-      "deflection_mm": 5.022349842337114,
+      "phiMn_kNm": 347.56251538587605,
+      "flexure_DCR": 0.9386800519549292,
+      "phiVn_kN": 220.05868141912174,
+      "shear_DCR": 0.9883727312977555,
+      "As_mm2": 1548.3025233951935,
+      "Asp_mm2": 774.1512616975967,
+      "n_bars": 4,
+      "n_compression_bars": 2,
+      "stirrup_spacing_mm": 210.0,
+      "deflection_mm": 5.143743105161245,
       "deflection_allowable_mm": 25.0,
       "deflection_adequate": true,
       "shear_reinforcement_required": true
@@ -180,7 +180,7 @@
     "section": {
       "b_mm": 300.0,
       "h_mm": 700.0,
-      "d_mm": 640.0,
+      "d_mm": 639.4,
       "fc_MPa": 28.0,
       "fy_MPa": 420.0,
       "fyt_MPa": 280.0
@@ -191,16 +191,16 @@
       "span_m": 6.0
     },
     "python_results": {
-      "phiMn_kNm": 416.5068166509174,
-      "flexure_DCR": 0.8643315922047036,
-      "phiVn_kN": 240.64915593774035,
-      "shear_DCR": 0.9973024798894026,
-      "As_mm2": 1884.9555921538758,
-      "Asp_mm2": 942.4777960769379,
-      "n_bars": 6,
-      "n_compression_bars": 3,
-      "stirrup_spacing_mm": 190.0,
-      "deflection_mm": 4.924583799392016,
+      "phiMn_kNm": 426.1244954631003,
+      "flexure_DCR": 0.8448235288815349,
+      "phiVn_kN": 241.38671370490468,
+      "shear_DCR": 0.9942552194210659,
+      "As_mm2": 1935.378154243992,
+      "Asp_mm2": 774.1512616975967,
+      "n_bars": 5,
+      "n_compression_bars": 2,
+      "stirrup_spacing_mm": 170.0,
+      "deflection_mm": 5.021319246213244,
       "deflection_allowable_mm": 25.0,
       "deflection_adequate": true,
       "shear_reinforcement_required": true
@@ -223,7 +223,7 @@
     "section": {
       "b_mm": 250.0,
       "h_mm": 400.0,
-      "d_mm": 342.0,
+      "d_mm": 342.55,
       "fc_MPa": 28.0,
       "fy_MPa": 420.0,
       "fyt_MPa": 280.0
@@ -234,16 +234,16 @@
       "span_m": 2.5
     },
     "python_results": {
-      "phiMn_kNm": 49.827647837723674,
-      "flexure_DCR": 0.9407427810491934,
-      "phiVn_kN": 124.04551777737368,
-      "shear_DCR": 0.30230838382489406,
-      "As_mm2": 402.1238596594935,
-      "Asp_mm2": 402.1238596594935,
+      "phiMn_kNm": 49.31585563465299,
+      "flexure_DCR": 0.9505056618557812,
+      "phiVn_kN": 117.7643521427442,
+      "shear_DCR": 0.3184325249337389,
+      "As_mm2": 397.1130193770178,
+      "Asp_mm2": 397.1130193770178,
       "n_bars": 2,
       "n_compression_bars": 2,
       "stirrup_spacing_mm": 170.0,
-      "deflection_mm": 0.6026247661046538,
+      "deflection_mm": 0.6036237393249129,
       "deflection_allowable_mm": 10.416666666666666,
       "deflection_adequate": true,
       "shear_reinforcement_required": true
@@ -266,7 +266,7 @@
     "section": {
       "b_mm": 250.0,
       "h_mm": 400.0,
-      "d_mm": 342.0,
+      "d_mm": 342.55,
       "fc_MPa": 28.0,
       "fy_MPa": 420.0,
       "fyt_MPa": 280.0
@@ -277,16 +277,16 @@
       "span_m": 2.5
     },
     "python_results": {
-      "phiMn_kNm": 73.12348457387276,
-      "flexure_DCR": 0.7692467109273714,
-      "phiVn_kN": 124.04551777737368,
-      "shear_DCR": 0.3627700605898729,
-      "As_mm2": 603.1857894892403,
-      "Asp_mm2": 402.1238596594935,
+      "phiMn_kNm": 72.39586831068537,
+      "flexure_DCR": 0.7769780418767034,
+      "phiVn_kN": 117.7643521427442,
+      "shear_DCR": 0.3821190299204867,
+      "As_mm2": 595.6695290655267,
+      "Asp_mm2": 397.1130193770178,
       "n_bars": 3,
       "n_compression_bars": 2,
       "stirrup_spacing_mm": 170.0,
-      "deflection_mm": 0.6026247661046538,
+      "deflection_mm": 0.6036237393249129,
       "deflection_allowable_mm": 10.416666666666666,
       "deflection_adequate": true,
       "shear_reinforcement_required": true
@@ -309,7 +309,7 @@
     "section": {
       "b_mm": 250.0,
       "h_mm": 400.0,
-      "d_mm": 342.0,
+      "d_mm": 342.55,
       "fc_MPa": 28.0,
       "fy_MPa": 420.0,
       "fyt_MPa": 280.0
@@ -320,16 +320,16 @@
       "span_m": 2.5
     },
     "python_results": {
-      "phiMn_kNm": 73.12348457387276,
-      "flexure_DCR": 0.8974544960819333,
-      "phiVn_kN": 124.04551777737368,
-      "shear_DCR": 0.4232317373548517,
-      "As_mm2": 603.1857894892403,
-      "Asp_mm2": 402.1238596594935,
+      "phiMn_kNm": 72.39586831068537,
+      "flexure_DCR": 0.9064743821894873,
+      "phiVn_kN": 117.7643521427442,
+      "shear_DCR": 0.44580553490723446,
+      "As_mm2": 595.6695290655267,
+      "Asp_mm2": 397.1130193770178,
       "n_bars": 3,
       "n_compression_bars": 2,
       "stirrup_spacing_mm": 170.0,
-      "deflection_mm": 0.6026247661046538,
+      "deflection_mm": 0.6036237393249129,
       "deflection_allowable_mm": 10.416666666666666,
       "deflection_adequate": true,
       "shear_reinforcement_required": true
@@ -352,7 +352,7 @@
     "section": {
       "b_mm": 250.0,
       "h_mm": 400.0,
-      "d_mm": 342.0,
+      "d_mm": 342.55,
       "fc_MPa": 28.0,
       "fy_MPa": 420.0,
       "fyt_MPa": 280.0
@@ -363,16 +363,16 @@
       "span_m": 2.5
     },
     "python_results": {
-      "phiMn_kNm": 95.34066318821333,
-      "flexure_DCR": 0.7866528036619743,
-      "phiVn_kN": 124.04551777737368,
-      "shear_DCR": 0.48369341411983047,
-      "As_mm2": 804.247719318987,
-      "Asp_mm2": 402.1238596594935,
+      "phiMn_kNm": 94.42393755918829,
+      "flexure_DCR": 0.7942901126421181,
+      "phiVn_kN": 117.7643521427442,
+      "shear_DCR": 0.5094920398939822,
+      "As_mm2": 794.2260387540356,
+      "Asp_mm2": 397.1130193770178,
       "n_bars": 4,
       "n_compression_bars": 2,
       "stirrup_spacing_mm": 170.0,
-      "deflection_mm": 0.6026247661046538,
+      "deflection_mm": 0.6036237393249129,
       "deflection_allowable_mm": 10.416666666666666,
       "deflection_adequate": true,
       "shear_reinforcement_required": true
@@ -395,7 +395,7 @@
     "section": {
       "b_mm": 250.0,
       "h_mm": 400.0,
-      "d_mm": 342.0,
+      "d_mm": 342.55,
       "fc_MPa": 28.0,
       "fy_MPa": 420.0,
       "fyt_MPa": 280.0
@@ -406,16 +406,16 @@
       "span_m": 2.5
     },
     "python_results": {
-      "phiMn_kNm": 95.34066318821333,
-      "flexure_DCR": 0.8849844041197211,
-      "phiVn_kN": 124.04551777737368,
-      "shear_DCR": 0.5441550908848093,
-      "As_mm2": 804.247719318987,
-      "Asp_mm2": 402.1238596594935,
+      "phiMn_kNm": 94.42393755918829,
+      "flexure_DCR": 0.893576376722383,
+      "phiVn_kN": 117.7643521427442,
+      "shear_DCR": 0.5731785448807301,
+      "As_mm2": 794.2260387540356,
+      "Asp_mm2": 397.1130193770178,
       "n_bars": 4,
       "n_compression_bars": 2,
       "stirrup_spacing_mm": 170.0,
-      "deflection_mm": 0.6026247661046538,
+      "deflection_mm": 0.6036237393249129,
       "deflection_allowable_mm": 10.416666666666666,
       "deflection_adequate": true,
       "shear_reinforcement_required": true

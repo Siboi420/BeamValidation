@@ -17,12 +17,15 @@ Results are saved for comparison with SPBeam (commercial software).
 
 import sys
 import os
+import csv
 import numpy as np
 import json
 from datetime import datetime
 
 # Add parent directory to path to import the beam module
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, project_root)
+
 
 # Import the existing beam design function
 from scripts.RCBeam_moment_capacity import design_beam
@@ -41,7 +44,7 @@ beam_types = {
     "A": {
         "name": "Type-A: Simply Supported Floor Beam",
         "description": "Interior floor beam, 300×700 mm, f'c=28 MPa, 6m span",
-        "b": 300.0, "h": 700.0, "p": 40.0, "dl": 20.0, "dt": 10.0,
+        "b": 300.0, "h": 700.0, "p": 40.0, "dl": 22.2, "dt": 9.5,
         "f_c": 28.0, "f_yl": 420.0, "f_yt": 280.0,
         "L_span": 6.0, "w_service": 20.0,
         "support_type": "simply_supported",  # M = wL²/8, V = wL/2
@@ -49,7 +52,7 @@ beam_types = {
     "C": {
         "name": "Type-C: Cantilever Balcony Beam",
         "description": "Cantilever beam, 250×400 mm, f'c=28 MPa, 2.5m span",
-        "b": 250.0, "h": 400.0, "p": 40.0, "dl": 16.0, "dt": 10.0,
+        "b": 250.0, "h": 400.0, "p": 40.0, "dl": 15.9, "dt": 9.5,
         "f_c": 28.0, "f_yl": 420.0, "f_yt": 280.0,
         "L_span": 2.5, "w_service": 15.0,
         "support_type": "cantilever",  # M = wL²/2, V = wL
@@ -180,6 +183,58 @@ def run_python_designs(all_cases):
 # ============================================================================
 #  GENERATE COMPARISON OUTPUT
 # ============================================================================
+
+def _load_existing_commercial_data(csv_path):
+    """
+    Load Commercial_* columns from an existing CSV to preserve user-entered values.
+    
+    Returns a dict: {case_id: [commercial_values_list]} matching the 7 blank fields
+    in the CSV row generation.
+    """
+    if not os.path.exists(csv_path):
+        return {}
+    
+    commercial_fields = [
+        "Commercial_phiMn_kNm", "Commercial_DCR", "Commercial_phiVn_kN",
+        "Commercial_V_DCR", "Commercial_As_mm2", "Commercial_Asp_mm2",
+        "Commercial_stirrup_spacing_mm"
+    ]
+    
+    existing = {}
+    with open(csv_path, "r") as f:
+        reader = csv.reader(f)
+        try:
+            headers = next(reader)
+        except StopIteration:
+            return {}
+        
+        # Find column indices for commercial fields
+        try:
+            case_idx = headers.index("CaseID")
+        except ValueError:
+            return {}
+        
+        com_indices = []
+        for field in commercial_fields:
+            try:
+                com_indices.append(headers.index(field))
+            except ValueError:
+                com_indices.append(-1)  # field not found
+        
+        for row in reader:
+            if not row or len(row) <= case_idx:
+                continue
+            case_id = row[case_idx]
+            values = []
+            for idx in com_indices:
+                if idx >= 0 and idx < len(row):
+                    values.append(row[idx])
+                else:
+                    values.append("")
+            existing[case_id] = values
+    
+    return existing
+
 
 def generate_comparison_report(results):
     """Save a comprehensive comparison report."""
@@ -322,7 +377,11 @@ def generate_comparison_report(results):
     print(f"\n  [V] Report saved -> {txt_path}")
     
     # Save CSV for spreadsheet comparison
-    with open(csv_path, "w") as f:
+    # Load existing commercial data FIRST (before opening file for writing, which truncates it)
+    existing_commercial = _load_existing_commercial_data(csv_path)
+    
+    with open(csv_path, "w", newline="") as f:
+        writer = csv.writer(f, quoting=csv.QUOTE_ALL)
         # Header
         csv_headers = [
             "CaseID", "BeamType", "Description", "LoadStep", "LoadLabel", "LoadFactor",
@@ -335,10 +394,13 @@ def generate_comparison_report(results):
             "Commercial_phiMn_kNm", "Commercial_DCR", "Commercial_phiVn_kN", "Commercial_V_DCR",
             "Commercial_As_mm2", "Commercial_Asp_mm2", "Commercial_stirrup_spacing_mm"
         ]
-        f.write(",".join(csv_headers) + "\n")
+        writer.writerow(csv_headers)
         
         for r in results:
             if r["python_success"]:
+                # Check if we have existing commercial data for this case
+                com_vals = existing_commercial.get(r["case_id"], ["", "", "", "", "", "", ""])
+                
                 row = [
                     r["case_id"],
                     r["beam_type"],
@@ -358,10 +420,11 @@ def generate_comparison_report(results):
                     f"{r['py_delta_total']:.2f}", f"{r['py_delta_allow']:.2f}",
                     "Yes" if r['py_deflection_ok'] else "No",
                     "Yes" if r['py_shear_reinf'] else "No",
-                    # Commercial fields left blank for user to fill
-                    "", "", "", "", "", "", ""
+                    # Commercial fields — preserved from previous run if available
+                    com_vals[0], com_vals[1], com_vals[2], com_vals[3],
+                    com_vals[4], com_vals[5], com_vals[6],
                 ]
-                f.write(",".join(row) + "\n")
+                writer.writerow(row)
     
     print(f"  [V] CSV data saved -> {csv_path}")
     

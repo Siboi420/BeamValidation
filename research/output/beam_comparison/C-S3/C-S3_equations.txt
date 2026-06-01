@@ -7,39 +7,39 @@
 
   2. A_s,min (Minimum reinforcement)
      A_s,min1 = 0.25*sqrt(f_c')/f_y * b * d
-              = 0.25*sqrt(28.0)/420.0 * 250.0 * 342.00 = 269.300 mm2
+              = 0.25*sqrt(28.0)/420.0 * 250.0 * 342.55 = 269.733 mm2
      A_s,min2 = 1.4/f_y * b * d
-              = 1.4/420.0 * 250.0 * 342.00 = 285.000 mm2
-     A_s,min  = max(269.300, 285.000) = 285.000 mm2
+              = 1.4/420.0 * 250.0 * 342.55 = 285.458 mm2
+     A_s,min  = max(269.733, 285.458) = 285.458 mm2
 
   3. A_s,max (Maximum reinforcement)
      A_s,bal = 0.85*f_c'*beta_1*(eps_cu/(eps_cu+eps_y))*d
-             = 0.85*28.0*0.850*(0.003/(0.003+0.00210))*342.00
-             = 4069.800 mm2
-     A_s,max = 0.75*A_s,bal = 0.75*4069.800 = 3052.350 mm2
+             = 0.85*28.0*0.850*(0.003/(0.003+0.00210))*342.55
+             = 4076.345 mm2
+     A_s,max = 0.75*A_s,bal = 0.75*4076.345 = 3057.259 mm2
 
   4. Effective depths
-     d   = h - p - dt - dl/2 = 400.0 - 40.0 - 10.0 - 16.0/2 = 342.00 mm
-     d'  = p + dt + dl/2 = 40.0 + 10.0 + 16.0/2 = 58.00 mm
+     d   = h - p - dt - dl/2 = 400.0 - 40.0 - 9.5 - 15.9/2 = 342.55 mm
+     d'  = p + dt + dl/2 = 40.0 + 9.5 + 15.9/2 = 57.45 mm
 
   5. Neutral axis & stress block
      a   = solved from M_u/phi = 0.85*f_c'*b*a*(d-a/2)
-     a   = 42.58 mm
-     c   = a/beta_1 = 42.58/0.850 = 50.09 mm
+     a   = 42.05 mm
+     c   = a/beta_1 = 42.05/0.850 = 49.47 mm
 
   6. Concrete compression force
-     C_c = 0.85*f_c'*b*a = 0.85*28.0*250.0*42.58 = 253338.03 N
+     C_c = 0.85*f_c'*b*a = 0.85*28.0*250.0*42.05 = 250181.20 N
 
   7. Required tension reinforcement
-     A_s = C_c / f_y = 253338.03 / 420.0 = 603.186 mm2
+     A_s = C_c / f_y = 250181.20 / 420.0 = 595.670 mm2
 
   8. Nominal & design moment
-     M_n   = C_c*(d - a/2) = 253338.03*(342.00 - 42.58/2) = 81248316.19 N-mm
-     phiM_n  = 0.9*M_n = 0.9*81248316.19 = 73123484.57 N-mm
-            = 73.123 kN-m
+     M_n   = C_c*(d - a/2) = 250181.20*(342.55 - 42.05/2) = 80439853.68 N-mm
+     phiM_n  = phi*M_n = 0.90*80439853.68 = 72395868.31 N-mm
+            = 72.396 kN-m
 
   9. Demand-Capacity Ratio (DCR)
-     DCR  = M_u / phiM_n = 65.62 / 73.123 = 0.897
+     DCR  = M_u / phiM_n = 65.62 / 72.396 = 0.906
      -> DCR <= 1.0, section is ADEQUATE
 
   SHEAR CAPACITY (ACI 318-14)
@@ -47,20 +47,23 @@
   Applied shear force, V_u          = 52.50 kN
   Concrete shear strength, V_c
     V_c = 0.17*lambda*sqrt(f_c')*b_w*d
-        = 0.17*1.0*sqrt(28.0)*250.0*342.00 / 1000
-        = 76.912 kN
-  phiV_c = 0.75*76.912 = 57.684 kN
-  0.5*phiV_c = 28.842 kN
+        = 0.17*1.0*sqrt(28.0)*250.0*342.55 / 1000
+        = 77.036 kN
+  phiV_c = 0.75*77.036 = 57.777 kN
+  0.5*phiV_c = 28.888 kN
   Shear reinforcement required?     Yes
 
-  Stirrup area (2-leg O10mm), A_v = 2*(pi*10.02/4) = 157.08 mm2
-  Required V_s = V_u/phi - V_c = 52.50/0.75 - 76.912 = 0.000 kN
-  Max spacing (ACI 9.7.6.2.2), s_max = 171.0 mm
+  Stirrup area (2-leg O10mm), A_v = 2*(pi*9.52/4) = 141.76 mm2
+  Required V_s = V_u/phi - V_c = 52.50/0.75 - 77.036 = 0.000 kN
+  Required spacing, s_req = A_v*f_yt*d / V_s
+                         = 141.76*280.0*342.55 / 0.000 / 1000
+                         = 453.6 mm
+  Max spacing (ACI 9.7.6.2.2), s_max = 171.3 mm
   Final spacing, s = 170 mm
-  Actual V_s = A_v*f_yt*d / s = 157.08*280.0*342.00/170/1000 = 88.482 kN
+  Actual V_s = A_v*f_yt*d / s = 141.76*280.0*342.55/170/1000 = 79.983 kN
   Design shear strength, phiV_n
-    phiV_n = phi*(V_c + V_s) = 0.75*(76.912 + 88.482) = 124.046 kN
-  Shear DCR = V_u / phiV_n = 52.50 / 124.046 = 0.423
+    phiV_n = phi*(V_c + V_s) = 0.75*(77.036 + 79.983) = 117.764 kN
+  Shear DCR = V_u / phiV_n = 52.50 / 117.764 = 0.446
   -> Shear DCR <= 1.0, shear capacity is ADEQUATE
 
   DEFLECTION CHECK (ACI 318-14 Section 24.2)
@@ -74,14 +77,14 @@
   Gross moment of inertia, Ig        = 1333333333.3 mm4
   Modulus of rupture, fr             = 3.281 MPa
   Cracking moment, Mcr               = 21.872 kN-m
-  Reinforcement ratio, rho           = 0.0071
-  Neutral axis factor, k             = 0.2849
-  Neutral axis depth, kd             = 97.42 mm
-  Cracked moment of inertia, Icr     = 367214032.7 mm4
+  Reinforcement ratio, rho           = 0.0070
+  Neutral axis factor, k             = 0.2832
+  Neutral axis depth, kd             = 97.00 mm
+  Cracked moment of inertia, Icr     = 364883478.1 mm4
   Effective moment of inertia, Ie    = 1333333333.3 mm4
 
   Immediate deflection, delta_i      = 0.23 mm
-  Long-term factor, lambda_delta     = 1.619
+  Long-term factor, lambda_delta     = 1.624
   Long-term deflection, delta_lt     = 0.37 mm
   Total deflection, delta_total      = 0.60 mm
   Allowable deflection (L/240)       = 10.42 mm
