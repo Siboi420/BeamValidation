@@ -355,7 +355,8 @@ def design_beam(name, b, h, p, dl, dt, f_c, f_yl, f_yt, M_ue, V_ue,
             c = a / beta_1
             Cc = 0.85 * f_c * b * a
             M_n = Cc * (d - a / 2)
-            fM_n = phi_flexure * M_n
+            epsilon_t = EPSILON_CU * (d - c) / c
+            fM_n = M_n * _strength_reduction_factor(epsilon_t, epsilon_y)
 
             # Minimum 2 compression bars for stirrup stability
             bar_area = dl**2 * np.pi / 4
@@ -374,7 +375,8 @@ def design_beam(name, b, h, p, dl, dt, f_c, f_yl, f_yt, M_ue, V_ue,
             c = a / beta_1
             Cc = 0.85 * f_c * b * a
             M_n = Cc * (d - a / 2)
-            fM_n = phi_flexure * M_n
+            epsilon_t = EPSILON_CU * (d - c) / c
+            fM_n = M_n * _strength_reduction_factor(epsilon_t, epsilon_y)
 
             # Minimum 2 compression bars for stirrup stability
             bar_area = dl**2 * np.pi / 4
@@ -415,15 +417,25 @@ def design_beam(name, b, h, p, dl, dt, f_c, f_yl, f_yt, M_ue, V_ue,
                 n = max(2, int(np.ceil(A_s_total_req / bar_area)))
                 A_s = n * bar_area
 
-                # Recompute actual capacity
-                a = A_s * f_yl / (0.85 * f_c * b)
-                c = a / beta_1
+                # Recompute actual capacity from discrete bar areas
+                # Solve force equilibrium for c (accounts for compression steel)
+                # T = Cc + Cs  =>  A_s*f_y = 0.85*f_c*b*beta_1*c + A_sp*(Es*eps_cu*(c-d')/c - 0.85*f_c)
+                A_coeff = 0.85 * f_c * b * beta_1
+                B_coeff = A_sp * Es * EPSILON_CU - 0.85 * f_c * A_sp - A_s * f_yl
+                C_coeff = -A_sp * Es * EPSILON_CU * d_prime
+                disc = B_coeff**2 - 4 * A_coeff * C_coeff
+                if disc >= 0:
+                    c = (-B_coeff + np.sqrt(disc)) / (2 * A_coeff)
+                else:
+                    c = c_max  # fallback
+                a = beta_1 * c
                 Cc = 0.85 * f_c * b * a
                 epsilon_s_prime = EPSILON_CU * (c - d_prime) / c
-                f_s_prime = min(epsilon_s_prime * Es, f_yl)
+                f_s_prime = min(Es * epsilon_s_prime, f_yl)
                 Cs = A_sp * (f_s_prime - 0.85 * f_c)
                 M_n = Cc * (d - a / 2) + Cs * (d - d_prime)
-                fM_n =  M_n * _strength_reduction_factor(epsilon_s_prime, epsilon_y)
+                epsilon_t = EPSILON_CU * (d - c) / c
+                fM_n = M_n * _strength_reduction_factor(epsilon_t, epsilon_y)
             else:
                 # Demand is small enough to be singly reinforced with max steel
                 bar_area = dl**2 * np.pi / 4
@@ -435,8 +447,10 @@ def design_beam(name, b, h, p, dl, dt, f_c, f_yl, f_yt, M_ue, V_ue,
                 c = a / beta_1
                 Cc = 0.85 * f_c * b * a
                 M_n = Cc * (d - a / 2)
-                fM_n =  M_n * _strength_reduction_factor(epsilon_s_prime, epsilon_y)
+                epsilon_t = EPSILON_CU * (d - c) / c
+                fM_n = M_n * _strength_reduction_factor(epsilon_t, epsilon_y)
 
+                # Minimum 2 compression bars for stirrup stability
                 bar_area = dl**2 * np.pi / 4
                 n_prime = max(2, int(np.ceil(A_smin / bar_area)))
                 A_sp = n_prime * bar_area
