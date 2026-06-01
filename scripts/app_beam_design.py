@@ -395,6 +395,16 @@ def run_rc_design_page():
                         f"- **Clear spacing:** {result['xx_dis']:.1f} mm"
                     )
 
+                    if result['layering_required']:
+                        st.warning(
+                            f"⚠️ **Bar overcrowding!** Clear spacing = {result['xx_dis']:.1f} mm "
+                            f"< 25 mm minimum (ACI 318-14 Section 25.2.1).\n\n"
+                            f"**Suggestions:**\n"
+                            f"- Use smaller bar diameter\n"
+                            f"- Increase section width\n"
+                            f"- Arrange bars in multiple layers"
+                        )
+
                     st.markdown("**Section Properties**")
                     st.info(
                         f"- **b = {result['b']:.0f} mm, h = {result['h']:.0f} mm**\n"
