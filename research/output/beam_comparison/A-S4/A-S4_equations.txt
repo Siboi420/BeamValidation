@@ -1,0 +1,93 @@
+====================================================
+  A-S4 — DESIGN EQUATIONS & RESULTS
+====================================================
+
+  1. beta_1 (Stress block factor)
+     f_c' <= 28 -> beta_1 = 0.85
+
+  2. A_s,min (Minimum reinforcement)
+     A_s,min1 = 0.25*sqrt(f_c')/f_y * b * d
+              = 0.25*sqrt(28.0)/420.0 * 300.0 * 640.00 = 604.743 mm2
+     A_s,min2 = 1.4/f_y * b * d
+              = 1.4/420.0 * 300.0 * 640.00 = 640.000 mm2
+     A_s,min  = max(604.743, 640.000) = 640.000 mm2
+
+  3. A_s,max (Maximum reinforcement)
+     A_s,bal = 0.85*f_c'*beta_1*(eps_cu/(eps_cu+eps_y))*d
+             = 0.85*28.0*0.850*(0.003/(0.003+0.00210))*640.00
+             = 7616.000 mm2
+     A_s,max = 0.75*A_s,bal = 0.75*7616.000 = 5712.000 mm2
+
+  4. Effective depths
+     d   = h - p - dt - dl/2 = 700.0 - 40.0 - 10.0 - 20.0/2 = 640.00 mm
+     d'  = p + dt + dl/2 = 40.0 + 10.0 + 20.0/2 = 60.00 mm
+
+  5. Neutral axis & stress block
+     a   = solved from M_u/phi = 0.85*f_c'*b*a*(d-a/2)
+     a   = 92.40 mm
+     c   = a/beta_1 = 92.40/0.850 = 108.71 mm
+
+  6. Concrete compression force
+     C_c = 0.85*f_c'*b*a = 0.85*28.0*300.0*92.40 = 659734.46 N
+
+  7. Required tension reinforcement
+     A_s = C_c / f_y = 659734.46 / 420.0 = 1570.796 mm2
+
+  8. Nominal & design moment
+     M_n   = C_c*(d - a/2) = 659734.46*(640.00 - 92.40/2) = 391750391.99 N-mm
+     phiM_n  = 0.9*M_n = 0.9*391750391.99 = 352575352.79 N-mm
+            = 352.575 kN-m
+
+  9. Demand-Capacity Ratio (DCR)
+     DCR  = M_u / phiM_n = 326.25 / 352.575 = 0.925
+     -> DCR <= 1.0, section is ADEQUATE
+
+  SHEAR CAPACITY (ACI 318-14)
+----------------------------------------------------
+  Applied shear force, V_u          = 217.50 kN
+  Concrete shear strength, V_c
+    V_c = 0.17*lambda*sqrt(f_c')*b_w*d
+        = 0.17*1.0*sqrt(28.0)*300.0*640.00 / 1000
+        = 172.715 kN
+  phiV_c = 0.75*172.715 = 129.536 kN
+  0.5*phiV_c = 64.768 kN
+  Shear reinforcement required?     Yes
+
+  Stirrup area (2-leg O10mm), A_v = 2*(pi*10.02/4) = 157.08 mm2
+  Required V_s = V_u/phi - V_c = 217.50/0.75 - 172.715 = 117.285 kN
+  Required spacing, s_req = A_v*f_yt*d / V_s
+                         = 157.08*280.0*640.00 / 117.285 / 1000
+                         = 240.0 mm
+  Max spacing (ACI 9.7.6.2.2), s_max = 320.0 mm
+  Final spacing, s = 240 mm
+  Actual V_s = A_v*f_yt*d / s = 157.08*280.0*640.00/240/1000 = 117.286 kN
+  Design shear strength, phiV_n
+    phiV_n = phi*(V_c + V_s) = 0.75*(172.715 + 117.286) = 217.501 kN
+  Shear DCR = V_u / phiV_n = 217.50 / 217.501 = 1.000
+  -> Shear DCR <= 1.0, shear capacity is ADEQUATE
+
+  DEFLECTION CHECK (ACI 318-14 Section 24.2)
+----------------------------------------------------
+  Span length, L                     = 6.00 m
+  Service load, w                    = 20.00 kN/m
+  Service moment, M_service          = 90.000 kN-m
+  Concrete modulus, Ec               = 24870 MPa
+  Modular ratio, n = Es/Ec           = 8.04
+
+  Gross moment of inertia, Ig        = 8575000000.0 mm4
+  Modulus of rupture, fr             = 3.281 MPa
+  Cracking moment, Mcr               = 80.378 kN-m
+  Reinforcement ratio, rho           = 0.0082
+  Neutral axis factor, k             = 0.3029
+  Neutral axis depth, kd             = 193.84 mm
+  Cracked moment of inertia, Icr     = 3242848542.6 mm4
+  Effective moment of inertia, Ie    = 7041114028.2 mm4
+
+  Immediate deflection, delta_i      = 1.93 mm
+  Long-term factor, lambda_delta     = 1.606
+  Long-term deflection, delta_lt     = 3.10 mm
+  Total deflection, delta_total      = 5.02 mm
+  Allowable deflection (L/240)       = 25.00 mm
+  -> Deflection ADEQUATE (delta_total=5.02 mm <= 25.00 mm)
+
+====================================================

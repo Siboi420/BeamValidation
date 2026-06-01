@@ -1,0 +1,10 @@
+Database,Concrete,SampleSize_n,Mean_mu,StdDev_sigma,CoV_pct,Outside_5_95pct,Source_Table
+Flexure,NAC,18,1.064,0.092,8.64,2,Table 2
+Flexure,RAC50,14,1.079,0.155,14.36,2,Table 2
+Flexure,RAC100,17,1.091,0.144,13.24,2,Table 2
+Shear NS,NAC,530,1.030,0.279,27.03,75,Table 4
+Shear NS,RAC50,24,1.060,0.151,14.25,0,Table 4
+Shear NS,RAC100,22,1.054,0.233,22.07,2,Table 4
+Shear S,NAC,45,1.346,0.337,25.03,4,Table 6
+Shear S,RAC50,8,1.861,0.286,15.34,3,Table 6
+Shear S,RAC100,9,1.682,0.348,20.71,1,Table 6

@@ -1,0 +1,125 @@
+====================================================================================================
+  RC BEAM COMPARISON BENCHMARK — PYTHON vs COMMERCIAL SOFTWARE
+====================================================================================================
+  Generated: 2026-05-31 20:24:10
+  Code Standard: ACI 318-14
+  Engine: RCBeam_moment_capacity.py (Python)
+  Total Cases: 10
+
+====================================================================================================
+
+  BEAM TYPE: Type-A: Simply Supported Floor Beam
+  Description: Interior floor beam, 300×700 mm, f'c=28 MPa, 6m span
+  Section: 300 × 700 mm
+  f'c = 28 MPa,  fy = 420 MPa,  fyt = 280 MPa
+                                                            UDL (kN/m)← Apply this UDL in commercial software 
+----------------------------------------------------------------------------------------------------
+  Case     Load                 w       Mu       Vu        φMn      DCR      φVn    V_DCR      s       As      As' Status  
+  -------- -------------- ------- -------- -------- ---------- -------- -------- -------- ------ -------- -------- --------
+  A-S1     w=50.0 kN/m      50.00    225.0    150.0      286.4    0.785    195.5    0.767    320     1257      942 ✅       
+  A-S2     w=57.5 kN/m      57.50    258.8    172.5      286.4    0.903    195.5    0.882    320     1257      942 ✅       
+  A-S3     w=65.0 kN/m      65.00    292.5    195.0      352.6    0.830    195.5    0.997    320     1571      942 ✅       
+  A-S4     w=72.5 kN/m      72.50    326.2    217.5      352.6    0.925    217.5    1.000    240     1571      942 ✅       
+  A-S5     w=80.0 kN/m      80.00    360.0    240.0      416.5    0.864    240.6    0.997    190     1885      942 ✅       
+
+  ────────────────────────────────────────────────────────────────────────────────────────────────────
+  KEY DESIGN PARAMETERS FOR Type-A: Simply Supported Floor Beam
+  ────────────────────────────────────────────────────────────────────────────────────────────────────
+  Design level (Step 3):
+    M_u = 292.5 kN-m,  V_u = 195.0 kN
+    Effective depth d = 640.0 mm
+    Tension steel: 5 × Ø20.0 mm bars
+    Compression steel: 3 × Ø20.0 mm bars
+    Stirrups: Ø10.0 mm @ 320 mm
+    Ie/Ig ratio: 0.821
+    Total deflection: 5.02 mm (allow 25.00 mm)
+    Deflection status: ✅ ADEQUATE
+
+  RECOMMENDED REINFORCEMENT FOR COMMERCIAL SOFTWARE COMPARISON:
+    Bottom bars: 5 × Ø20.0
+    Top bars: 3 × Ø20.0
+    A_s = 1570.8 mm²
+    A_s' = 942.5 mm²
+    ρ = 0.0082
+    ρ_max = 0.75ρ_bal = 0.0212
+    Shear reinf: Required
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+
+  BEAM TYPE: Type-C: Cantilever Balcony Beam
+  Description: Cantilever beam, 250×400 mm, f'c=28 MPa, 2.5m span
+  Section: 250 × 400 mm
+  f'c = 28 MPa,  fy = 420 MPa,  fyt = 280 MPa
+                                                            UDL (kN/m)← Apply this UDL in commercial software 
+----------------------------------------------------------------------------------------------------
+  Case     Load                 w       Mu       Vu        φMn      DCR      φVn    V_DCR      s       As      As' Status  
+  -------- -------------- ------- -------- -------- ---------- -------- -------- -------- ------ -------- -------- --------
+  C-S1     w=15.0 kN/m      15.00     46.9     37.5       49.8    0.941    124.0    0.302    170      402      402 ✅       
+  C-S2     w=18.0 kN/m      18.00     56.2     45.0       73.1    0.769    124.0    0.363    170      603      402 ✅       
+  C-S3     w=21.0 kN/m      21.00     65.6     52.5       73.1    0.897    124.0    0.423    170      603      402 ✅       
+  C-S4     w=24.0 kN/m      24.00     75.0     60.0       95.3    0.787    124.0    0.484    170      804      402 ✅       
+  C-S5     w=27.0 kN/m      27.00     84.4     67.5       95.3    0.885    124.0    0.544    170      804      402 ✅       
+
+  ────────────────────────────────────────────────────────────────────────────────────────────────────
+  KEY DESIGN PARAMETERS FOR Type-C: Cantilever Balcony Beam
+  ────────────────────────────────────────────────────────────────────────────────────────────────────
+  Design level (Step 3):
+    M_u = 65.6 kN-m,  V_u = 52.5 kN
+    Effective depth d = 342.0 mm
+    Tension steel: 3 × Ø16.0 mm bars
+    Compression steel: 2 × Ø16.0 mm bars
+    Stirrups: Ø10.0 mm @ 170 mm
+    Ie/Ig ratio: 1.000
+    Total deflection: 0.60 mm (allow 10.42 mm)
+    Deflection status: ✅ ADEQUATE
+
+  RECOMMENDED REINFORCEMENT FOR COMMERCIAL SOFTWARE COMPARISON:
+    Bottom bars: 3 × Ø16.0
+    Top bars: 2 × Ø16.0
+    A_s = 603.2 mm²
+    A_s' = 402.1 mm²
+    ρ = 0.0071
+    ρ_max = 0.75ρ_bal = 0.0212
+    Shear reinf: Required
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+
+====================================================================================================
+  VERIFICATION GUIDE — ETABS & SPBeam
+====================================================================================================
+
+  A. ETABS Verification:
+     - Create beam element with the given section (b × h)
+     - Apply the UDL (w column) as a frame distributed load
+     - Run analysis to verify M_u and V_u match
+     - Run concrete design per ACI 318-14
+     - Compare: required A_s, stirrup spacing, DCR
+
+  B. SPBeam Verification:
+     - Define beam section with given b, h, cover, materials
+     - Input the design M_u and V_u from Python output
+     - Run design per ACI 318-14
+     - Compare: required A_s, A_s', stirrup spacing, deflection
+
+  C. Key parameters to match in both:
+     - Stress block factor β₁
+     - Tension-controlled strain limit ε_t = 0.005
+     - Strength reduction factor φ = 0.9
+     - Minimum reinforcement A_s,min
+     - Maximum reinforcement A_s,max = 0.75A_s,bal
+
+  D. Expected differences:
+     - Results should match within 1-3%
+     - Minor differences may arise from:
+       a) Slightly different cover assumptions
+       b) Bar rounding conventions
+       c) Minimum reinforcement handling
+       d) Deflection calculation assumptions
+
+  E. CSV columns to fill:
+     - Commercial_phiMn_kNm — Enter ETABS/SPBeam moment capacity
+     - Commercial_DCR — Enter ETABS/SPBeam demand-capacity ratio
+     - Commercial_As_mm2 — Enter required tension steel area
+     - Commercial_Asp_mm2 — Enter required compression steel area
+     - Commercial_stirrup_spacing_mm — Enter stirrup spacing
+====================================================================================================

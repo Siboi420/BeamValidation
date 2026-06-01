@@ -1,0 +1,432 @@
+[
+  {
+    "case_id": "A-S1",
+    "beam_type": "Type-A: Simply Supported Floor Beam",
+    "load_step": 1,
+    "load_label": "w=50.0 kN/m",
+    "w_udl_kNm": 50.0,
+    "section": {
+      "b_mm": 300.0,
+      "h_mm": 700.0,
+      "d_mm": 640.0,
+      "fc_MPa": 28.0,
+      "fy_MPa": 420.0,
+      "fyt_MPa": 280.0
+    },
+    "loads": {
+      "Mu_kNm": 225.0,
+      "Vu_kN": 150.0,
+      "span_m": 6.0
+    },
+    "python_results": {
+      "phiMn_kNm": 286.44935336793344,
+      "flexure_DCR": 0.7854791688462844,
+      "phiVn_kN": 195.50942991510803,
+      "shear_DCR": 0.7672264200511012,
+      "As_mm2": 1256.6370614359173,
+      "Asp_mm2": 942.4777960769379,
+      "n_bars": 4,
+      "n_compression_bars": 3,
+      "stirrup_spacing_mm": 320.0,
+      "deflection_mm": 5.1317930818969,
+      "deflection_allowable_mm": 25.0,
+      "deflection_adequate": true,
+      "shear_reinforcement_required": true
+    },
+    "commercial_results_placeholder": {
+      "phiMn_kNm": null,
+      "DCR": null,
+      "phiVn_kN": null,
+      "As_mm2": null,
+      "Asp_mm2": null,
+      "stirrup_spacing_mm": null
+    }
+  },
+  {
+    "case_id": "A-S2",
+    "beam_type": "Type-A: Simply Supported Floor Beam",
+    "load_step": 2,
+    "load_label": "w=57.5 kN/m",
+    "w_udl_kNm": 57.5,
+    "section": {
+      "b_mm": 300.0,
+      "h_mm": 700.0,
+      "d_mm": 640.0,
+      "fc_MPa": 28.0,
+      "fy_MPa": 420.0,
+      "fyt_MPa": 280.0
+    },
+    "loads": {
+      "Mu_kNm": 258.75,
+      "Vu_kN": 172.5,
+      "span_m": 6.0
+    },
+    "python_results": {
+      "phiMn_kNm": 286.44935336793344,
+      "flexure_DCR": 0.9033010441732272,
+      "phiVn_kN": 195.50942991510803,
+      "shear_DCR": 0.8823103830587664,
+      "As_mm2": 1256.6370614359173,
+      "Asp_mm2": 942.4777960769379,
+      "n_bars": 4,
+      "n_compression_bars": 3,
+      "stirrup_spacing_mm": 320.0,
+      "deflection_mm": 5.1317930818969,
+      "deflection_allowable_mm": 25.0,
+      "deflection_adequate": true,
+      "shear_reinforcement_required": true
+    },
+    "commercial_results_placeholder": {
+      "phiMn_kNm": null,
+      "DCR": null,
+      "phiVn_kN": null,
+      "As_mm2": null,
+      "Asp_mm2": null,
+      "stirrup_spacing_mm": null
+    }
+  },
+  {
+    "case_id": "A-S3",
+    "beam_type": "Type-A: Simply Supported Floor Beam",
+    "load_step": 3,
+    "load_label": "w=65.0 kN/m",
+    "w_udl_kNm": 65.0,
+    "section": {
+      "b_mm": 300.0,
+      "h_mm": 700.0,
+      "d_mm": 640.0,
+      "fc_MPa": 28.0,
+      "fy_MPa": 420.0,
+      "fyt_MPa": 280.0
+    },
+    "loads": {
+      "Mu_kNm": 292.5,
+      "Vu_kN": 195.0,
+      "span_m": 6.0
+    },
+    "python_results": {
+      "phiMn_kNm": 352.57535279284065,
+      "flexure_DCR": 0.8296098910006947,
+      "phiVn_kN": 195.50942991510803,
+      "shear_DCR": 0.9973943460664315,
+      "As_mm2": 1570.7963267948965,
+      "Asp_mm2": 942.4777960769379,
+      "n_bars": 5,
+      "n_compression_bars": 3,
+      "stirrup_spacing_mm": 320.0,
+      "deflection_mm": 5.022349842337114,
+      "deflection_allowable_mm": 25.0,
+      "deflection_adequate": true,
+      "shear_reinforcement_required": true
+    },
+    "commercial_results_placeholder": {
+      "phiMn_kNm": null,
+      "DCR": null,
+      "phiVn_kN": null,
+      "As_mm2": null,
+      "Asp_mm2": null,
+      "stirrup_spacing_mm": null
+    }
+  },
+  {
+    "case_id": "A-S4",
+    "beam_type": "Type-A: Simply Supported Floor Beam",
+    "load_step": 4,
+    "load_label": "w=72.5 kN/m",
+    "w_udl_kNm": 72.5,
+    "section": {
+      "b_mm": 300.0,
+      "h_mm": 700.0,
+      "d_mm": 640.0,
+      "fc_MPa": 28.0,
+      "fy_MPa": 420.0,
+      "fyt_MPa": 280.0
+    },
+    "loads": {
+      "Mu_kNm": 326.25,
+      "Vu_kN": 217.5,
+      "span_m": 6.0
+    },
+    "python_results": {
+      "phiMn_kNm": 352.57535279284065,
+      "flexure_DCR": 0.9253341091930826,
+      "phiVn_kN": 217.50057849023662,
+      "shear_DCR": 0.9999973402818483,
+      "As_mm2": 1570.7963267948965,
+      "Asp_mm2": 942.4777960769379,
+      "n_bars": 5,
+      "n_compression_bars": 3,
+      "stirrup_spacing_mm": 240.0,
+      "deflection_mm": 5.022349842337114,
+      "deflection_allowable_mm": 25.0,
+      "deflection_adequate": true,
+      "shear_reinforcement_required": true
+    },
+    "commercial_results_placeholder": {
+      "phiMn_kNm": null,
+      "DCR": null,
+      "phiVn_kN": null,
+      "As_mm2": null,
+      "Asp_mm2": null,
+      "stirrup_spacing_mm": null
+    }
+  },
+  {
+    "case_id": "A-S5",
+    "beam_type": "Type-A: Simply Supported Floor Beam",
+    "load_step": 5,
+    "load_label": "w=80.0 kN/m",
+    "w_udl_kNm": 80.0,
+    "section": {
+      "b_mm": 300.0,
+      "h_mm": 700.0,
+      "d_mm": 640.0,
+      "fc_MPa": 28.0,
+      "fy_MPa": 420.0,
+      "fyt_MPa": 280.0
+    },
+    "loads": {
+      "Mu_kNm": 360.0,
+      "Vu_kN": 240.0,
+      "span_m": 6.0
+    },
+    "python_results": {
+      "phiMn_kNm": 416.5068166509174,
+      "flexure_DCR": 0.8643315922047036,
+      "phiVn_kN": 240.64915593774035,
+      "shear_DCR": 0.9973024798894026,
+      "As_mm2": 1884.9555921538758,
+      "Asp_mm2": 942.4777960769379,
+      "n_bars": 6,
+      "n_compression_bars": 3,
+      "stirrup_spacing_mm": 190.0,
+      "deflection_mm": 4.924583799392016,
+      "deflection_allowable_mm": 25.0,
+      "deflection_adequate": true,
+      "shear_reinforcement_required": true
+    },
+    "commercial_results_placeholder": {
+      "phiMn_kNm": null,
+      "DCR": null,
+      "phiVn_kN": null,
+      "As_mm2": null,
+      "Asp_mm2": null,
+      "stirrup_spacing_mm": null
+    }
+  },
+  {
+    "case_id": "C-S1",
+    "beam_type": "Type-C: Cantilever Balcony Beam",
+    "load_step": 1,
+    "load_label": "w=15.0 kN/m",
+    "w_udl_kNm": 15.0,
+    "section": {
+      "b_mm": 250.0,
+      "h_mm": 400.0,
+      "d_mm": 342.0,
+      "fc_MPa": 28.0,
+      "fy_MPa": 420.0,
+      "fyt_MPa": 280.0
+    },
+    "loads": {
+      "Mu_kNm": 46.875,
+      "Vu_kN": 37.5,
+      "span_m": 2.5
+    },
+    "python_results": {
+      "phiMn_kNm": 49.827647837723674,
+      "flexure_DCR": 0.9407427810491934,
+      "phiVn_kN": 124.04551777737368,
+      "shear_DCR": 0.30230838382489406,
+      "As_mm2": 402.1238596594935,
+      "Asp_mm2": 402.1238596594935,
+      "n_bars": 2,
+      "n_compression_bars": 2,
+      "stirrup_spacing_mm": 170.0,
+      "deflection_mm": 0.6026247661046538,
+      "deflection_allowable_mm": 10.416666666666666,
+      "deflection_adequate": true,
+      "shear_reinforcement_required": true
+    },
+    "commercial_results_placeholder": {
+      "phiMn_kNm": null,
+      "DCR": null,
+      "phiVn_kN": null,
+      "As_mm2": null,
+      "Asp_mm2": null,
+      "stirrup_spacing_mm": null
+    }
+  },
+  {
+    "case_id": "C-S2",
+    "beam_type": "Type-C: Cantilever Balcony Beam",
+    "load_step": 2,
+    "load_label": "w=18.0 kN/m",
+    "w_udl_kNm": 18.0,
+    "section": {
+      "b_mm": 250.0,
+      "h_mm": 400.0,
+      "d_mm": 342.0,
+      "fc_MPa": 28.0,
+      "fy_MPa": 420.0,
+      "fyt_MPa": 280.0
+    },
+    "loads": {
+      "Mu_kNm": 56.25,
+      "Vu_kN": 45.0,
+      "span_m": 2.5
+    },
+    "python_results": {
+      "phiMn_kNm": 73.12348457387276,
+      "flexure_DCR": 0.7692467109273714,
+      "phiVn_kN": 124.04551777737368,
+      "shear_DCR": 0.3627700605898729,
+      "As_mm2": 603.1857894892403,
+      "Asp_mm2": 402.1238596594935,
+      "n_bars": 3,
+      "n_compression_bars": 2,
+      "stirrup_spacing_mm": 170.0,
+      "deflection_mm": 0.6026247661046538,
+      "deflection_allowable_mm": 10.416666666666666,
+      "deflection_adequate": true,
+      "shear_reinforcement_required": true
+    },
+    "commercial_results_placeholder": {
+      "phiMn_kNm": null,
+      "DCR": null,
+      "phiVn_kN": null,
+      "As_mm2": null,
+      "Asp_mm2": null,
+      "stirrup_spacing_mm": null
+    }
+  },
+  {
+    "case_id": "C-S3",
+    "beam_type": "Type-C: Cantilever Balcony Beam",
+    "load_step": 3,
+    "load_label": "w=21.0 kN/m",
+    "w_udl_kNm": 21.0,
+    "section": {
+      "b_mm": 250.0,
+      "h_mm": 400.0,
+      "d_mm": 342.0,
+      "fc_MPa": 28.0,
+      "fy_MPa": 420.0,
+      "fyt_MPa": 280.0
+    },
+    "loads": {
+      "Mu_kNm": 65.625,
+      "Vu_kN": 52.5,
+      "span_m": 2.5
+    },
+    "python_results": {
+      "phiMn_kNm": 73.12348457387276,
+      "flexure_DCR": 0.8974544960819333,
+      "phiVn_kN": 124.04551777737368,
+      "shear_DCR": 0.4232317373548517,
+      "As_mm2": 603.1857894892403,
+      "Asp_mm2": 402.1238596594935,
+      "n_bars": 3,
+      "n_compression_bars": 2,
+      "stirrup_spacing_mm": 170.0,
+      "deflection_mm": 0.6026247661046538,
+      "deflection_allowable_mm": 10.416666666666666,
+      "deflection_adequate": true,
+      "shear_reinforcement_required": true
+    },
+    "commercial_results_placeholder": {
+      "phiMn_kNm": null,
+      "DCR": null,
+      "phiVn_kN": null,
+      "As_mm2": null,
+      "Asp_mm2": null,
+      "stirrup_spacing_mm": null
+    }
+  },
+  {
+    "case_id": "C-S4",
+    "beam_type": "Type-C: Cantilever Balcony Beam",
+    "load_step": 4,
+    "load_label": "w=24.0 kN/m",
+    "w_udl_kNm": 24.0,
+    "section": {
+      "b_mm": 250.0,
+      "h_mm": 400.0,
+      "d_mm": 342.0,
+      "fc_MPa": 28.0,
+      "fy_MPa": 420.0,
+      "fyt_MPa": 280.0
+    },
+    "loads": {
+      "Mu_kNm": 75.0,
+      "Vu_kN": 60.0,
+      "span_m": 2.5
+    },
+    "python_results": {
+      "phiMn_kNm": 95.34066318821333,
+      "flexure_DCR": 0.7866528036619743,
+      "phiVn_kN": 124.04551777737368,
+      "shear_DCR": 0.48369341411983047,
+      "As_mm2": 804.247719318987,
+      "Asp_mm2": 402.1238596594935,
+      "n_bars": 4,
+      "n_compression_bars": 2,
+      "stirrup_spacing_mm": 170.0,
+      "deflection_mm": 0.6026247661046538,
+      "deflection_allowable_mm": 10.416666666666666,
+      "deflection_adequate": true,
+      "shear_reinforcement_required": true
+    },
+    "commercial_results_placeholder": {
+      "phiMn_kNm": null,
+      "DCR": null,
+      "phiVn_kN": null,
+      "As_mm2": null,
+      "Asp_mm2": null,
+      "stirrup_spacing_mm": null
+    }
+  },
+  {
+    "case_id": "C-S5",
+    "beam_type": "Type-C: Cantilever Balcony Beam",
+    "load_step": 5,
+    "load_label": "w=27.0 kN/m",
+    "w_udl_kNm": 27.0,
+    "section": {
+      "b_mm": 250.0,
+      "h_mm": 400.0,
+      "d_mm": 342.0,
+      "fc_MPa": 28.0,
+      "fy_MPa": 420.0,
+      "fyt_MPa": 280.0
+    },
+    "loads": {
+      "Mu_kNm": 84.375,
+      "Vu_kN": 67.5,
+      "span_m": 2.5
+    },
+    "python_results": {
+      "phiMn_kNm": 95.34066318821333,
+      "flexure_DCR": 0.8849844041197211,
+      "phiVn_kN": 124.04551777737368,
+      "shear_DCR": 0.5441550908848093,
+      "As_mm2": 804.247719318987,
+      "Asp_mm2": 402.1238596594935,
+      "n_bars": 4,
+      "n_compression_bars": 2,
+      "stirrup_spacing_mm": 170.0,
+      "deflection_mm": 0.6026247661046538,
+      "deflection_allowable_mm": 10.416666666666666,
+      "deflection_adequate": true,
+      "shear_reinforcement_required": true
+    },
+    "commercial_results_placeholder": {
+      "phiMn_kNm": null,
+      "DCR": null,
+      "phiVn_kN": null,
+      "As_mm2": null,
+      "Asp_mm2": null,
+      "stirrup_spacing_mm": null
+    }
+  }
+]
