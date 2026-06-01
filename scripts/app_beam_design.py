@@ -397,12 +397,13 @@ def run_rc_design_page():
 
                     if result['layering_required']:
                         st.warning(
-                            f"⚠️ **Bar overcrowding!** Clear spacing = {result['xx_dis']:.1f} mm "
+                            f"⚠️ **Bar overcrowding!** Initial Clear spacing on the bottom layer = {result['xx_dis']:.1f} mm "            
                             f"< 25 mm minimum (ACI 318-14 Section 25.2.1).\n\n"
+                            f"New distance between bars on the layer 1 = {result['xx_dis1']:.1f} mm \n\n"            
+                            f"New distance between bars on the layer 2 = {result['xx_dis2']:.1f} mm \n\n"
                             f"Bars automatically redistributed into **2 layers** "
                             f"(d = {result['d']:.1f} mm)."
                         )
-
                     st.markdown("**Section Properties**")
                     st.info(
                         f"- **b = {result['b']:.0f} mm, h = {result['h']:.0f} mm**\n"

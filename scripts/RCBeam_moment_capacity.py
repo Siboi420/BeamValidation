@@ -470,12 +470,17 @@ def design_beam(name, b, h, p, dl, dt, f_c, f_yl, f_yt, M_ue, V_ue,
 
     A_v = 2 * (np.pi * dt**2 / 4)  # mm², 2-leg stirrup area
 
+    # Min reinforcement spacing (ACI 318-14 Section 9.6.3.4)
+    s_min_reinf = (A_v * f_yt) / (0.062 * np.sqrt(f_c) * b)
+    s_min_reinf = min(s_min_reinf, (A_v * f_yt) / (0.35 * b))
+
+
     if V_ue > phi_V_c:
         V_s_req = (V_ue / phi_v) - V_c
-        s_req = (A_v * f_yt * d / 1000) / V_s_req if V_s_req > 0 else float('inf')
+        s_req = (A_v * f_yt * d / 1000) / V_s_req if V_s_req > 0 else s_min_reinf
     else:
         V_s_req = 0
-        s_req = float('inf')
+        s_req = s_min_reinf
 
     # Max spacing (ACI 318-14 Section 9.7.6.2.2)
     if V_s_req > 0.33 * np.sqrt(f_c) * b * d / 1000:
@@ -483,15 +488,11 @@ def design_beam(name, b, h, p, dl, dt, f_c, f_yl, f_yt, M_ue, V_ue,
     else:
         s_max = min(d / 2, 600)
 
-    # Min reinforcement spacing (ACI 318-14 Section 9.6.3.4)
-    s_min_reinf = (A_v * f_yt) / (0.062 * np.sqrt(f_c) * b)
-    s_min_reinf = min(s_min_reinf, (A_v * f_yt) / (0.35 * b))
-
     if shear_reinforcement_required:
-        s_final = min(s_req, s_max, s_min_reinf)
-        s_final = max(1, np.floor(s_final / 10) * 10)
+        s_final = min(s_req, s_max, s_min_reinf)/50 * 50
+        s_final = max(1, np.floor(s_final / 10) * 10)/50 * 50
     else:
-        s_final = s_max
+        s_final = round(s_max/50) * 50
 
     V_s_actual = (A_v * f_yt * d / 1000) / s_final if (shear_reinforcement_required and s_final > 0) else 0
     phi_V_n = phi_v * (V_c + V_s_actual)
@@ -630,6 +631,8 @@ def design_beam(name, b, h, p, dl, dt, f_c, f_yl, f_yt, M_ue, V_ue,
         "V_s_actual": V_s_actual, "phi_V_n": phi_V_n, "V_DCR": V_DCR,
         "layering_required": layering_required,
         "xx_dis": xx_dis,
+        "xx_dis1": xx_dis1 if layering_required else None, 
+        "xx_dis2": xx_dis2 if layering_required else None,
         "epsilon_y": epsilon_y,
         "epsilon_s": epsilon_s,
         "lambda_factor": lambda_factor,
