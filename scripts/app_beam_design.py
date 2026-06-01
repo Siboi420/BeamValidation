@@ -88,8 +88,6 @@ def plot_diagrams(diagram):
     L = diagram['L']
     support_type = diagram['support_type']
 
-    st.write(diagram['M_max'])
-
     if support_type == "SS":
 
         fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8, 5), sharex=True)
