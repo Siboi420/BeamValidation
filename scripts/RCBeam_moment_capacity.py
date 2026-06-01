@@ -224,6 +224,8 @@ def design_beam(name, b, h, p, dl, dt, f_c, f_yl, f_yt, M_ue, V_ue,
     else:
         beta_1 = 0.85
 
+    phi_flexure = _strength_reduction_factor(epsilon_s, epsilon_y)
+
     # -----------------------------------------------------------------------
     #  Effective depths
     # -----------------------------------------------------------------------
@@ -314,7 +316,6 @@ def design_beam(name, b, h, p, dl, dt, f_c, f_yl, f_yt, M_ue, V_ue,
         # ---------------------------------------------------------------
         #  DESIGN MODE — calculate required steel from design moment
         # ---------------------------------------------------------------
-        phi_flexure = 0.9
         M_u_Nmm = M_ue * 1e6  # convert kN-m to N-mm
 
         # Solve quadratic for stress block depth 'a' from M_u / φ:
@@ -422,7 +423,7 @@ def design_beam(name, b, h, p, dl, dt, f_c, f_yl, f_yt, M_ue, V_ue,
                 f_s_prime = min(epsilon_s_prime * Es, f_yl)
                 Cs = A_sp * (f_s_prime - 0.85 * f_c)
                 M_n = Cc * (d - a / 2) + Cs * (d - d_prime)
-                fM_n = phi_flexure * M_n
+                fM_n =  M_n * _strength_reduction_factor(epsilon_s_prime, epsilon_y)
             else:
                 # Demand is small enough to be singly reinforced with max steel
                 bar_area = dl**2 * np.pi / 4
@@ -434,7 +435,7 @@ def design_beam(name, b, h, p, dl, dt, f_c, f_yl, f_yt, M_ue, V_ue,
                 c = a / beta_1
                 Cc = 0.85 * f_c * b * a
                 M_n = Cc * (d - a / 2)
-                fM_n = phi_flexure * M_n
+                fM_n =  M_n * _strength_reduction_factor(epsilon_s_prime, epsilon_y)
 
                 bar_area = dl**2 * np.pi / 4
                 n_prime = max(2, int(np.ceil(A_smin / bar_area)))
@@ -588,6 +589,7 @@ def design_beam(name, b, h, p, dl, dt, f_c, f_yl, f_yt, M_ue, V_ue,
         "deflection_adequate": deflection_adequate,
         "lambda_delta": lambda_delta,
         "rho": rho, "rho_comp": rho_comp,
+        "phi_flexure": phi_flexure,
     }
 
 
@@ -653,7 +655,7 @@ def save_equations(r, output_dir):
     lines.append("")
     lines.append("  8. Nominal & design moment")
     lines.append(f"     M_n   = C_c*(d - a/2) = {r['Cc']:.2f}*({r['d']:.2f} - {r['a']:.2f}/2) = {r['M_n']:.2f} N-mm")
-    lines.append(f"     phiM_n  = 0.9*M_n = 0.9*{r['M_n']:.2f} = {r['fM_n']:.2f} N-mm")
+    lines.append(f"     phiM_n  = phi*M_n = {r['phi_flexure']:.2f}*{r['M_n']:.2f} = {r['fM_n']:.2f} N-mm")
     lines.append(f"            = {r['fM_n']/1e6:.3f} kN-m")
 
     lines.append("")
