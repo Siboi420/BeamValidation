@@ -505,16 +505,25 @@ def design_beam(name, b, h, p, dl, dt, f_c, f_yl, f_yt, M_ue, V_ue,
 
     if layering_required and n > 1:
         # Redistribute bars into two layers and recalculate effective depth
-        n1 = int(np.ceil(n / 2))   # bottom layer (more bars)
-        n2 = n - n1                 # top layer
-        d1 = d                      # bottom layer at original effective depth
-        d2 = d - dl - MINIMUM_SPACING  # top layer above + clear spacing
-        d_eff = (n1 * d1 + n2 * d2) / n  # centroid of both layers
+        n1 = max(2, int(np.ceil(n / 2)))  # bottom layer (at least 2 bars)
+        n2 = n - n1                       # top layer
+        d1 = d                            # bottom layer at original effective depth
+        d2 = d - dl - MINIMUM_SPACING     # top layer above + clear spacing
+        d_eff = (n1 * d1 + n2 * d2) / n   # centroid of both layers
+
+        # Check spacing per layer
+        xx_dis1 = (b - 2 * p - dt * 2 - dl) / (n1 - 1) if n1 > 1 else 0
+        xx_dis2 = (b - 2 * p - dt * 2 - dl) / (n2 - 1) if n2 > 1 else 0
 
         print(f"\n  ⚠ WARNING: Bar clear spacing = {xx_dis:.1f} mm < {MINIMUM_SPACING} mm minimum!")
         print(f"    Section: {b:.0f} mm x {h:.0f} mm with {int(n)} bars O{dl:.0f} mm.")
-        print(f"    → Redistributed into {n1} + {n2} layers.")
-        print(f"    → Effective d: {d:.1f} mm → {d_eff:.1f} mm.\n")
+        print(f"    → Redistributed into {n1} + {n2} layers (new d = {d_eff:.1f} mm).")
+        if xx_dis1 < MINIMUM_SPACING or xx_dis2 < MINIMUM_SPACING:
+            print(f"    → ❌ Per-layer spacing still < {MINIMUM_SPACING} mm!")
+            print(f"       Layer 1 ({n1} bars): {xx_dis1:.1f} mm | Layer 2 ({n2} bars): {xx_dis2:.1f} mm")
+            print(f"       Section too narrow for {n} bars O{dl:.0f}. Increase beam width or use smaller bars.\n")
+        else:
+            print(f"    → ✅ Per-layer spacing: {xx_dis1:.1f} mm and {xx_dis2:.1f} mm (OK).\n")
 
         # Recompute moment capacity with corrected d
         d = d_eff
