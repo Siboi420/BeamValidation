@@ -88,38 +88,81 @@ def plot_diagrams(diagram):
     L = diagram['L']
     support_type = diagram['support_type']
 
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8, 5), sharex=True)
+    st.write(diagram['M_max'])
 
-    # Moment diagram
-    ax1.fill_between(x, 0, M, alpha=0.3, color='royalblue')
-    ax1.plot(x, M, 'b-', linewidth=2)
-    ax1.axhline(0, color='gray', linewidth=0.5)
-    ax1.set_ylabel("Moment (kN-m)", fontsize=11)
-    ax1.set_title(f"{SUPPORT_INFO[support_type]['label']} — Shear & Moment Diagrams", fontsize=12)
-    ax1.grid(True, alpha=0.3)
-    Mmax = np.max(np.abs(M))
-    ax1.annotate(f"M_max = {diagram['M_max']:.2f} kN-m",
-                 xy=(diagram['x_M'], diagram['M_max'] if M[np.argmax(np.abs(M))] >= 0 else -diagram['M_max']),
-                 fontsize=9, fontweight='bold', color='darkblue',
-                 xytext=(10, 20), textcoords='offset points',
-                 arrowprops=dict(arrowstyle='->', color='darkblue'))
+    if support_type == "SS":
 
-    # Shear diagram
-    ax2.fill_between(x, 0, V, alpha=0.3, where=(V >= 0), color='crimson')
-    ax2.fill_between(x, 0, V, alpha=0.3, where=(V < 0), color='darkred')
-    ax2.plot(x, V, 'r-', linewidth=2)
-    ax2.axhline(0, color='gray', linewidth=0.5)
-    ax2.set_xlabel("Position along beam (m)", fontsize=11)
-    ax2.set_ylabel("Shear (kN)", fontsize=11)
-    ax2.grid(True, alpha=0.3)
-    ax2.annotate(f"V_max = {diagram['V_max']:.2f} kN",
-                 xy=(diagram['x_V'], diagram['V_max']),
-                 fontsize=9, fontweight='bold', color='darkred',
-                 xytext=(10, 20), textcoords='offset points',
-                 arrowprops=dict(arrowstyle='->', color='darkred'))
+        fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8, 5), sharex=True)
+    
+        # Moment diagram
+        ax1.fill_between(x, 0, M, alpha=0.3, color='royalblue')
+        ax1.plot(x, M, 'b-', linewidth=2)
+        ax1.axhline(0, color='gray', linewidth=0.5)
+        ax1.set_ylabel("Moment (kN-m)", fontsize=11)
+        ax1.set_title(f"{SUPPORT_INFO[support_type]['label']} — Shear & Moment Diagrams", fontsize=12)
+        ax1.grid(True, alpha=0.3)
+        ax1.set_ylim(bottom=diagram['M_max']*-1 - 25, top=diagram['M_max'] + 25)
+        Mmax = np.max(np.abs(M))
+        ax1.annotate(f"M_max = {diagram['M_max']:.2f} kN-m",
+                    xy=(diagram['x_M'], diagram['M_max'] if M[np.argmax(np.abs(M))] >= 0 else -diagram['M_max']),
+                    fontsize=9, fontweight='bold', color='darkblue',
+                    xytext=(50, -10), textcoords='offset points',
+                    arrowprops=dict(arrowstyle='->', color='darkblue'))
+        ax1.invert_yaxis()
+        
+        # Shear diagram
+        ax2.fill_between(x, 0, V, alpha=0.3, where=(V >= 0), color='crimson')
+        ax2.fill_between(x, 0, V, alpha=0.3, where=(V < 0), color='darkred')
+        ax2.plot(x, V, 'r-', linewidth=2)
+        ax2.axhline(0, color='gray', linewidth=0.5)
+        ax2.set_xlabel("Position along beam (m)", fontsize=11)
+        ax2.set_ylabel("Shear (kN)", fontsize=11)
+        ax2.grid(True, alpha=0.3)
+        ax2.set_ylim(bottom=diagram['V_max']*-1 - 25, top=diagram['V_max'] + 25)
+        ax2.annotate(f"V_max = {diagram['V_max']:.2f} kN",
+                    xy=(diagram['x_V'], diagram['V_max']),
+                    fontsize=9, fontweight='bold', color='darkred',
+                    xytext=(50, 0), textcoords='offset points',
+                    arrowprops=dict(arrowstyle='->', color='darkred'))
+        plt.tight_layout()
+        return fig
 
-    plt.tight_layout()
-    return fig
+    elif support_type == "CANT" or support_type == "FF" or support_type == "PC":
+        fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8, 5), sharex=True)
+    
+        # Moment diagram
+        ax1.set_ylim(bottom=diagram['M_max']*-1 - 25, top=diagram['M_max'] + 25)
+        ax1.invert_yaxis()
+        ax1.fill_between(x, 0, -M, alpha=0.3, color='royalblue')
+        ax1.plot(x, -M, 'b-', linewidth=2)
+        ax1.axhline(0, color='gray', linewidth=0.5)
+        ax1.set_ylabel("Moment (kN-m)", fontsize=11)
+        ax1.set_title(f"{SUPPORT_INFO[support_type]['label']} — Shear & Moment Diagrams", fontsize=12)
+        ax1.grid(True, alpha=0.3)
+        Mmax = np.max(np.abs(M))
+        ax1.annotate(f"M_max = {diagram['M_max']:.2f} kN-m",
+                    xy=(diagram['x_M'], -diagram['M_max'] if M[np.argmax(np.abs(M))] >= 0 else diagram['M_max']),
+                    fontsize=9, fontweight='bold', color='darkblue',
+                    xytext=(50, 10), textcoords='offset points',
+                    arrowprops=dict(arrowstyle='->', color='darkblue'))
+        
+        # Shear diagram
+        ax2.fill_between(x, 0, V, alpha=0.3, where=(V >= 0), color='crimson')
+        ax2.fill_between(x, 0, V, alpha=0.3, where=(V < 0), color='darkred')
+        ax2.plot(x, V, 'r-', linewidth=2)
+        ax2.axhline(0, color='gray', linewidth=0.5)
+        ax2.set_xlabel("Position along beam (m)", fontsize=11)
+        ax2.set_ylabel("Shear (kN)", fontsize=11)
+        ax2.grid(True, alpha=0.3)
+        ax2.set_ylim(bottom=diagram['V_max']*-1 - 25, top=diagram['V_max'] + 25)
+        ax2.annotate(f"V_max = {diagram['V_max']:.2f} kN",
+                    xy=(diagram['x_V'], diagram['V_max']),
+                    fontsize=9, fontweight='bold', color='darkred',
+                    xytext=(50, 0), textcoords='offset points',
+                    arrowprops=dict(arrowstyle='->', color='darkred'))
+    
+        plt.tight_layout()
+        return fig
 
 
 def run_beam_diagram_page():
