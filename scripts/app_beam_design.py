@@ -399,10 +399,9 @@ def run_rc_design_page():
                         st.warning(
                             f"⚠️ **Bar overcrowding!** Clear spacing = {result['xx_dis']:.1f} mm "
                             f"< 25 mm minimum (ACI 318-14 Section 25.2.1).\n\n"
-                            f"**Suggestions:**\n"
-                            f"- Use smaller bar diameter\n"
-                            f"- Increase section width\n"
-                            f"- Arrange bars in multiple layers"
+                            f"Bars automatically redistributed into **2 layers**. "
+                            f"Effective depth **d** recalculated from centroid of both layers "
+                            f"(d = {result['d']:.1f} mm)."
                         )
 
                     st.markdown("**Section Properties**")

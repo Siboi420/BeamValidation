@@ -498,17 +498,44 @@ def design_beam(name, b, h, p, dl, dt, f_c, f_yl, f_yt, M_ue, V_ue,
     V_DCR = V_ue / phi_V_n if phi_V_n > 0 else 0
 
     # -----------------------------------------------------------------------
-    #  Bar spacing & layering
+    #  Bar spacing & layering (ACI 318-14 Section 25.2.1)
     # -----------------------------------------------------------------------
     xx_dis = (b - 2 * p - dt * 2 - dl) / (n - 1) if n > 1 else 0
     layering_required = xx_dis < MINIMUM_SPACING if n > 1 else False
 
-    # Warn if bar spacing is insufficient (ACI 318-14 Section 25.2.1)
     if layering_required and n > 1:
+        # Redistribute bars into two layers and recalculate effective depth
+        n1 = int(np.ceil(n / 2))   # bottom layer (more bars)
+        n2 = n - n1                 # top layer
+        d1 = d                      # bottom layer at original effective depth
+        d2 = d - dl - MINIMUM_SPACING  # top layer above + clear spacing
+        d_eff = (n1 * d1 + n2 * d2) / n  # centroid of both layers
+
         print(f"\n  ⚠ WARNING: Bar clear spacing = {xx_dis:.1f} mm < {MINIMUM_SPACING} mm minimum!")
         print(f"    Section: {b:.0f} mm x {h:.0f} mm with {int(n)} bars O{dl:.0f} mm.")
-        print(f"    Consider: using smaller bar diameter, increasing section width,")
-        print(f"    or arranging bars in multiple layers (not yet implemented).\n")
+        print(f"    → Redistributed into {n1} + {n2} layers.")
+        print(f"    → Effective d: {d:.1f} mm → {d_eff:.1f} mm.\n")
+
+        # Recompute moment capacity with corrected d
+        d = d_eff
+        a = A_s * f_yl / (0.85 * f_c * b)
+        c = a / beta_1
+        Cc = 0.85 * f_c * b * a
+
+        if A_sp > 0 and not steel_overridden:
+            # Doubly reinforced — recompute with new d
+            Es = 2e5
+            epsilon_s_prime = EPSILON_CU * (c - d_prime) / c
+            f_s_prime = min(Es * epsilon_s_prime, f_yl)
+            Cs = A_sp * (f_s_prime - 0.85 * f_c)
+            M_n = Cc * (d - a / 2) + Cs * (d - d_prime)
+        else:
+            # Singly reinforced (or capacity check mode)
+            M_n = Cc * (d - a / 2)
+
+        epsilon_t = EPSILON_CU * (d - c) / c
+        fM_n = M_n * _strength_reduction_factor(epsilon_t, epsilon_y)
+        DCR = M_ue / (fM_n / 1e6) if fM_n > 0 else 0.0
 
     # -----------------------------------------------------------------------
     #  Deflection check (ACI 318-14 Section 24.2)
