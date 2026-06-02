@@ -44,7 +44,7 @@ beam_types = {
     "A": {
         "name": "Type-A: Simply Supported Floor Beam",
         "description": "Interior floor beam, 300×700 mm, f'c=28 MPa, 6m span",
-        "b": 300.0, "h": 700.0, "p": 40.0, "dl": 22.2, "dt": 9.5,
+        "b": 300.0, "h": 700.0, "p": 40.0, "dl": 22.2, "dt": 12.7,
         "f_c": 28.0, "f_yl": 420.0, "f_yt": 280.0,
         "L_span": 6.0, "w_service": 20.0,
         "support_type": "simply_supported",  # M = wL²/8, V = wL/2
