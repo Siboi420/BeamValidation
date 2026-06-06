@@ -138,13 +138,18 @@ def compute_aci_flexure(b, d, A_s, f_c, f_yl):
     }
 
 
-def compute_aci_shear(b, d, f_c, A_v=0.0, s=0.0, f_yw=0.0):
+def compute_aci_shear(b, d, f_c, A_v=0.0, s=0.0, f_yw=0.0,
+                      A_s=None, V_u=None, M_u=None):
     """
     Compute ACI 318-14 shear capacity for a rectangular beam.
     
-    Standalone calculation — requires only cross-section parameters.
-    For beams WITHOUT stirrups: set A_v=0, s=0, f_yw=0 (default).
-    For beams WITH stirrups: provide A_v (total stirrup area, typically 2-leg), s, f_yw.
+    Uses the DETAILED V_c equation (ACI 318-14 Eq. 22.5.5.1) when A_s, V_u,
+    and M_u are provided, matching the method used by SPBeam and other
+    commercial software. Falls back to the simplified equation if these
+    parameters are omitted.
+    
+    Detailed:  V_c = [0.16·λ·√f'c + 17·ρ_w·(V_u·d/M_u)]·b_w·d ≤ 0.29·λ·√f'c·b_w·d
+    Simplified: V_c = 0.17·λ·√f'c · b_w · d
     
     Parameters
     ----------
@@ -154,6 +159,9 @@ def compute_aci_shear(b, d, f_c, A_v=0.0, s=0.0, f_yw=0.0):
     A_v : float — total stirrup area (mm²), usually 2 × area of one leg
     s : float — stirrup spacing (mm)
     f_yw : float — stirrup yield strength (MPa)
+    A_s : float, optional — longitudinal tension steel area (mm²)
+    V_u : float, optional — factored shear at critical section (kN)
+    M_u : float, optional — factored moment at critical section (kN-m)
     
     Returns
     -------
@@ -165,10 +173,22 @@ def compute_aci_shear(b, d, f_c, A_v=0.0, s=0.0, f_yw=0.0):
         phi_v : float — shear reduction factor (0.75)
     """
     lambda_factor = 1.0  # normal weight concrete
-    
-    # Concrete shear strength (ACI 318-14 Eq. 22.5.5.1)
-    V_c = 0.17 * lambda_factor * np.sqrt(f_c) * b * d / 1000  # kN
     phi_v = 0.75
+    
+    # Concrete shear strength — detailed equation if A_s/V_u/M_u are provided
+    if A_s is not None and V_u is not None and M_u is not None and M_u > 0:
+        # ACI 318-14 Eq. 22.5.5.1 (detailed)
+        rho_w = A_s / (b * d)
+        # V_u * d / M_u ratio, limited to ≤ 1.0 per ACI
+        vu_d_over_mu = min(abs(V_u) * d / (abs(M_u) * 1000), 1.0)
+        # Detailed V_c
+        V_c = (0.16 * lambda_factor * np.sqrt(f_c) + 17 * rho_w * vu_d_over_mu) * b * d / 1000
+        # Upper bound per ACI 318-14 §22.5.5.1
+        V_c_max = 0.29 * lambda_factor * np.sqrt(f_c) * b * d / 1000
+        V_c = min(V_c, V_c_max)
+    else:
+        # ACI 318-14 Eq. 22.5.5.1 (simplified)
+        V_c = 0.17 * lambda_factor * np.sqrt(f_c) * b * d / 1000  # kN
     
     # Steel shear contribution
     if A_v > 0 and s > 0 and f_yw > 0:
@@ -194,7 +214,8 @@ def compute_aci_shear(b, d, f_c, A_v=0.0, s=0.0, f_yw=0.0):
 
 def design_beam(name, b, h, p, dl, dt, f_c, f_yl, f_yt, M_ue, V_ue,
                 L_span=6.0, w_service=25.0,
-                A_s_provided=None, A_sp_provided=None):
+                A_s_provided=None, A_sp_provided=None,
+                M_ue_critical=None, V_ue_critical=None):
     """
     Design a single RC beam for flexure and shear per ACI 318-14.
 
@@ -462,8 +483,20 @@ def design_beam(name, b, h, p, dl, dt, f_c, f_yl, f_yt, M_ue, V_ue,
     #  Shear capacity (ACI 318-14 Section 22.5)
     # -----------------------------------------------------------------------
     lambda_factor = 1.0  # normal weight concrete
-    V_c = 0.17 * lambda_factor * np.sqrt(f_c) * b * d / 1000  # kN
     phi_v = 0.75
+    
+    # Use detailed V_c equation when critical section loads are available
+    if M_ue_critical is not None and V_ue_critical is not None and M_ue_critical > 0:
+        # ACI 318-14 Eq. 22.5.5.1 (detailed) — matches SPBeam
+        rho_w = A_s / (b * d)
+        vu_d_over_mu = min(abs(V_ue_critical) * d / (abs(M_ue_critical) * 1000), 1.0)
+        V_c = (0.16 * lambda_factor * np.sqrt(f_c) + 17 * rho_w * vu_d_over_mu) * b * d / 1000
+        V_c_max = 0.29 * lambda_factor * np.sqrt(f_c) * b * d / 1000
+        V_c = min(V_c, V_c_max)
+    else:
+        # Simplified equation — fallback when critical section data unavailable
+        V_c = 0.17 * lambda_factor * np.sqrt(f_c) * b * d / 1000  # kN
+    
     phi_V_c = phi_v * V_c
 
     shear_reinforcement_required = V_ue > 0.5 * phi_V_c

@@ -84,6 +84,21 @@ def generate_beam_cases():
                 M_ue = w * L * L / 2.0   # kN-m (negative moment at support)
                 V_ue = w * L             # kN
             
+            # Effective depth from beam geometry
+            d_eff = beam_type["h"] - (beam_type["p"] + beam_type["dt"] + beam_type["dl"] / 2)
+            d_m = d_eff / 1000  # effective depth in meters
+            
+            # Shear and moment at critical section (distance d from support face)
+            # ACI 318-14 Section 22.5: critical section located at d from support
+            if beam_type["support_type"] == "simply_supported":
+                V_ue_at_d = V_ue - w * d_m  # kN
+                # Moment at distance d from support = V_support × d - w × d²/2
+                M_ue_at_d = V_ue * d_m - w * d_m**2 / 2  # kN-m
+            else:
+                # Cantilever: critical section at face of support
+                V_ue_at_d = V_ue
+                M_ue_at_d = M_ue  # max moment is at support
+            
             case = {
                 "case_id": f"{type_key}-S{step_idx + 1}",
                 "beam_type": beam_type["name"],
@@ -102,9 +117,12 @@ def generate_beam_cases():
                 # Loads (UDL based)
                 "M_ue": M_ue,
                 "V_ue": V_ue,
+                "V_ue_at_d": V_ue_at_d,    # shear at critical section (kN)
+                "M_ue_at_d": M_ue_at_d,    # moment at critical section (kN-m)
                 "w_udl": w,              # INPUT UDL (kN/m) — use this in commercial software
                 "L_span": beam_type["L_span"],
                 "w_service": beam_type["w_service"],
+                "d_eff": d_eff,          # effective depth (mm)
             }
             all_cases.append(case)
     
@@ -127,7 +145,7 @@ def run_python_designs(all_cases):
     for case in all_cases:
         cid = case["case_id"]
         print(f"\n  [{cid}] {case['beam_type']} — {case['load_label']}")
-        print(f"  M_u = {case['M_ue']:.2f} kN-m, V_u = {case['V_ue']:.2f} kN")
+        print(f"  M_u = {case['M_ue']:.2f} kN-m, V_u = {case['V_ue']:.2f} kN, V_u@d = {case['V_ue_at_d']:.2f} kN, M_u@d = {case['M_ue_at_d']:.2f} kN-m")
         
         params = {
             "name": cid,
@@ -143,6 +161,9 @@ def run_python_designs(all_cases):
             "V_ue": case["V_ue"],
             "L_span": case["L_span"],
             "w_service": case["w_service"],
+            # Critical section loads for detailed V_c equation
+            "M_ue_critical": case["M_ue_at_d"],
+            "V_ue_critical": case["V_ue_at_d"],
         }
         
         try:
@@ -195,8 +216,8 @@ def _load_existing_commercial_data(csv_path):
         return {}
     
     commercial_fields = [
-        "Commercial_phiMn_kNm", "Commercial_DCR", "Commercial_phiVn_kN",
-        "Commercial_V_DCR", "Commercial_As_mm2", "Commercial_Asp_mm2",
+        "Commercial_phiMn_kNm", "Commercial_phiVn_at_d_kN",
+        "Commercial_As_mm2", "Commercial_Asp_mm2",
         "Commercial_stirrup_spacing_mm"
     ]
     
@@ -366,7 +387,7 @@ def generate_comparison_report(results):
     lines.append("")
     lines.append("  E. CSV columns to fill:")
     lines.append("     - Commercial_phiMn_kNm — Enter SPBeam moment capacity")
-    lines.append("     - Commercial_DCR — Enter SPBeam demand-capacity ratio")
+    lines.append("     - Commercial_phiVn_at_d_kN — Enter SPBeam shear capacity at critical section (distance d from support)")
     lines.append("     - Commercial_As_mm2 — Enter required tension steel area")
     lines.append("     - Commercial_Asp_mm2 — Enter required compression steel area")
     lines.append("     - Commercial_stirrup_spacing_mm — Enter stirrup spacing")
@@ -386,12 +407,12 @@ def generate_comparison_report(results):
         csv_headers = [
             "CaseID", "BeamType", "Description", "LoadStep", "LoadLabel", "LoadFactor",
             "b", "h", "d", "f_c", "f_yl", "f_yt",
-            "M_u_kNm", "V_u_kN", "w_UDL_kNm", "L_span_m",
+            "M_u_kNm", "V_u_kN", "V_u_at_d_kN", "w_UDL_kNm", "L_span_m",
             "Python_phiMn_kNm", "Python_DCR", "Python_phiVn_kN", "Python_V_DCR",
             "Python_As_mm2", "Python_Asp_mm2", "Python_n_bars", "Python_np_bars",
             "Python_stirrup_spacing_mm", "Python_delta_mm", "Python_delta_allow_mm",
             "Python_deflection_OK", "Python_shear_reinf_req",
-            "Commercial_phiMn_kNm", "Commercial_DCR", "Commercial_phiVn_kN", "Commercial_V_DCR",
+            "Commercial_phiMn_kNm", "Commercial_phiVn_at_d_kN",
             "Commercial_As_mm2", "Commercial_Asp_mm2", "Commercial_stirrup_spacing_mm"
         ]
         writer.writerow(csv_headers)
@@ -399,7 +420,7 @@ def generate_comparison_report(results):
         for r in results:
             if r["python_success"]:
                 # Check if we have existing commercial data for this case
-                com_vals = existing_commercial.get(r["case_id"], ["", "", "", "", "", "", ""])
+                com_vals = existing_commercial.get(r["case_id"], ["", "", "", "", ""])
                 
                 row = [
                     r["case_id"],
@@ -410,7 +431,7 @@ def generate_comparison_report(results):
                     f"{r['w_udl']:.2f}",
                     f"{r['b']:.1f}", f"{r['h']:.1f}", f"{r['py_d']:.1f}",
                     f"{r['f_c']:.1f}", f"{r['f_yl']:.1f}", f"{r['f_yt']:.1f}",
-                    f"{r['M_ue']:.2f}", f"{r['V_ue']:.2f}", f"{r['w_udl']:.2f}", f"{r['L_span']:.1f}",
+                    f"{r['M_ue']:.2f}", f"{r['V_ue']:.2f}", f"{r['V_ue_at_d']:.2f}", f"{r['w_udl']:.2f}", f"{r['L_span']:.1f}",
                     f"{r['py_fM_n']:.2f}", f"{r['py_DCR']:.4f}",
                     f"{r['py_phiV_n']:.2f}", f"{r['py_V_DCR']:.4f}",
                     f"{r['py_n']*np.pi*(r['dl']**2)/4:.1f}",
@@ -421,8 +442,7 @@ def generate_comparison_report(results):
                     "Yes" if r['py_deflection_ok'] else "No",
                     "Yes" if r['py_shear_reinf'] else "No",
                     # Commercial fields — preserved from previous run if available
-                    com_vals[0], com_vals[1], com_vals[2], com_vals[3],
-                    com_vals[4], com_vals[5], com_vals[6],
+                    com_vals[0], com_vals[1], com_vals[2], com_vals[3], com_vals[4],
                 ]
                 writer.writerow(row)
     
