@@ -243,6 +243,12 @@ The flexural database includes 18 NAC beams with a wide range of parameters:
 
 Key observations:
 
+**Figure 8: Flexural Validation Scatter — ACI vs EC2 vs Experimental**
+![Flexure Validation Scatter](../output/nac_validation/flexure_scatter.png)
+
+**Figure 9: Flexural Validation — Grouped Bar Chart**
+![Flexure Validation Bar](../output/nac_validation/flexure_bar.png)
+
 - **ACI 318-14 nominal predictions** show excellent accuracy with a mean model factor of 1.109 and the lowest coefficient of variation (5.85%) among all three methods. This indicates that ACI 318-14 provides consistent, slightly conservative predictions across a wide range of beam parameters.
 
 - **EC2 predictions** (from the paper) are slightly closer to unity (1.064) but with higher scatter (CoV = 8.46%). Two beams (CL-Av and CG-Av) have EC2 model factors of 0.860, indicating unconservative predictions for these high-strength specimens.
@@ -265,6 +271,18 @@ The shear database includes 24 beams without stirrups and 8 beams with stirrups.
 | With stirrups | ACI 318-14 (nom) | 8 | 1.089 | 21.53 | ✅ Accurate |
 
 Key observations:
+
+**Figure 10: Shear Validation (No Stirrups) Scatter**
+![Shear No Stirrups Scatter](../output/nac_validation/shear_no_stirrups_scatter.png)
+
+**Figure 11: Shear Validation (No Stirrups) — Grouped Bar Chart**
+![Shear No Stirrups Bar](../output/nac_validation/shear_no_stirrups_bar.png)
+
+**Figure 12: Shear Validation (With Stirrups) Scatter**
+![Shear With Stirrups Scatter](../output/nac_validation/shear_with_stirrups_scatter.png)
+
+**Figure 13: Shear Validation (With Stirrups) — Grouped Bar Chart**
+![Shear With Stirrups Bar](../output/nac_validation/shear_with_stirrups_bar.png)
 
 - **Shear without stirrups:** ACI 318-14 is very conservative (mean = 1.368) with high scatter (CoV = 26.07%). The large scatter reflects the inherent variability in shear behavior and the simplified nature of the ACI 318-14 shear equation (V_c = 0.17√f'c × b_w × d).
 
