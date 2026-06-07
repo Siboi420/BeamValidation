@@ -8,7 +8,7 @@
     "section": {
       "b_mm": 300.0,
       "h_mm": 700.0,
-      "d_mm": 639.4,
+      "d_mm": 636.2,
       "fc_MPa": 28.0,
       "fy_MPa": 420.0,
       "fyt_MPa": 280.0
@@ -19,16 +19,16 @@
       "span_m": 6.0
     },
     "python_results": {
-      "phiMn_kNm": 265.6690758009538,
-      "flexure_DCR": 0.8469182923215943,
-      "phiVn_kN": 190.8186371563549,
-      "shear_DCR": 0.7860867378331158,
+      "phiMn_kNm": 264.26445575172966,
+      "flexure_DCR": 0.8514198376015513,
+      "phiVn_kN": 243.43081289538517,
+      "shear_DCR": 0.6161915092665889,
       "As_mm2": 1161.2268925463952,
       "Asp_mm2": 774.1512616975967,
       "n_bars": 3,
       "n_compression_bars": 2,
       "stirrup_spacing_mm": 310.0,
-      "deflection_mm": 5.2845921482760225,
+      "deflection_mm": 5.288015710659077,
       "deflection_allowable_mm": 25.0,
       "deflection_adequate": true,
       "shear_reinforcement_required": true
@@ -51,7 +51,7 @@
     "section": {
       "b_mm": 300.0,
       "h_mm": 700.0,
-      "d_mm": 639.4,
+      "d_mm": 636.2,
       "fc_MPa": 28.0,
       "fy_MPa": 420.0,
       "fyt_MPa": 280.0
@@ -62,16 +62,16 @@
       "span_m": 6.0
     },
     "python_results": {
-      "phiMn_kNm": 265.6690758009538,
-      "flexure_DCR": 0.9739560361698335,
-      "phiVn_kN": 190.8186371563549,
-      "shear_DCR": 0.9039997485080832,
+      "phiMn_kNm": 264.26445575172966,
+      "flexure_DCR": 0.979132813241784,
+      "phiVn_kN": 243.43081289538517,
+      "shear_DCR": 0.7086202356565773,
       "As_mm2": 1161.2268925463952,
       "Asp_mm2": 774.1512616975967,
       "n_bars": 3,
       "n_compression_bars": 2,
       "stirrup_spacing_mm": 310.0,
-      "deflection_mm": 5.2845921482760225,
+      "deflection_mm": 5.288015710659077,
       "deflection_allowable_mm": 25.0,
       "deflection_adequate": true,
       "shear_reinforcement_required": true
@@ -94,7 +94,7 @@
     "section": {
       "b_mm": 300.0,
       "h_mm": 700.0,
-      "d_mm": 639.4,
+      "d_mm": 636.2,
       "fc_MPa": 28.0,
       "fy_MPa": 420.0,
       "fyt_MPa": 280.0
@@ -105,16 +105,16 @@
       "span_m": 6.0
     },
     "python_results": {
-      "phiMn_kNm": 347.56251538587605,
-      "flexure_DCR": 0.8415752189940744,
-      "phiVn_kN": 195.05340218751422,
-      "shear_DCR": 0.9997262176054592,
+      "phiMn_kNm": 345.68968865357726,
+      "flexure_DCR": 0.8461345813907694,
+      "phiVn_kN": 247.78066171396708,
+      "shear_DCR": 0.7869863558000503,
       "As_mm2": 1548.3025233951935,
       "Asp_mm2": 774.1512616975967,
       "n_bars": 4,
       "n_compression_bars": 2,
-      "stirrup_spacing_mm": 290.0,
-      "deflection_mm": 5.143743105161245,
+      "stirrup_spacing_mm": 310.0,
+      "deflection_mm": 5.14851221988629,
       "deflection_allowable_mm": 25.0,
       "deflection_adequate": true,
       "shear_reinforcement_required": true
@@ -137,7 +137,7 @@
     "section": {
       "b_mm": 300.0,
       "h_mm": 700.0,
-      "d_mm": 639.4,
+      "d_mm": 636.2,
       "fc_MPa": 28.0,
       "fy_MPa": 420.0,
       "fyt_MPa": 280.0
@@ -148,16 +148,16 @@
       "span_m": 6.0
     },
     "python_results": {
-      "phiMn_kNm": 347.56251538587605,
-      "flexure_DCR": 0.9386800519549292,
-      "phiVn_kN": 220.05868141912174,
-      "shear_DCR": 0.9883727312977555,
+      "phiMn_kNm": 345.68968865357726,
+      "flexure_DCR": 0.9437654946281658,
+      "phiVn_kN": 247.78066171396708,
+      "shear_DCR": 0.8777924737769792,
       "As_mm2": 1548.3025233951935,
       "Asp_mm2": 774.1512616975967,
       "n_bars": 4,
       "n_compression_bars": 2,
-      "stirrup_spacing_mm": 210.0,
-      "deflection_mm": 5.143743105161245,
+      "stirrup_spacing_mm": 310.0,
+      "deflection_mm": 5.14851221988629,
       "deflection_allowable_mm": 25.0,
       "deflection_adequate": true,
       "shear_reinforcement_required": true
@@ -180,7 +180,7 @@
     "section": {
       "b_mm": 300.0,
       "h_mm": 700.0,
-      "d_mm": 639.4,
+      "d_mm": 636.2,
       "fc_MPa": 28.0,
       "fy_MPa": 420.0,
       "fyt_MPa": 280.0
@@ -191,16 +191,16 @@
       "span_m": 6.0
     },
     "python_results": {
-      "phiMn_kNm": 426.1244954631003,
-      "flexure_DCR": 0.8448235288815349,
-      "phiVn_kN": 241.38671370490468,
-      "shear_DCR": 0.9942552194210659,
+      "phiMn_kNm": 423.78346204772686,
+      "flexure_DCR": 0.8494904408503239,
+      "phiVn_kN": 252.13051053254907,
+      "shear_DCR": 0.9518879706112241,
       "As_mm2": 1935.378154243992,
       "Asp_mm2": 774.1512616975967,
       "n_bars": 5,
       "n_compression_bars": 2,
-      "stirrup_spacing_mm": 170.0,
-      "deflection_mm": 5.021319246213244,
+      "stirrup_spacing_mm": 310.0,
+      "deflection_mm": 5.027220313393398,
       "deflection_allowable_mm": 25.0,
       "deflection_adequate": true,
       "shear_reinforcement_required": true
@@ -236,8 +236,8 @@
     "python_results": {
       "phiMn_kNm": 49.31585563465299,
       "flexure_DCR": 0.9505056618557812,
-      "phiVn_kN": 117.7643521427442,
-      "shear_DCR": 0.3184325249337389,
+      "phiVn_kN": 115.75323608505828,
+      "shear_DCR": 0.32396502480884504,
       "As_mm2": 397.1130193770178,
       "Asp_mm2": 397.1130193770178,
       "n_bars": 2,
@@ -279,8 +279,8 @@
     "python_results": {
       "phiMn_kNm": 72.39586831068537,
       "flexure_DCR": 0.7769780418767034,
-      "phiVn_kN": 117.7643521427442,
-      "shear_DCR": 0.3821190299204867,
+      "phiVn_kN": 116.44699451547504,
+      "shear_DCR": 0.3864419188081303,
       "As_mm2": 595.6695290655267,
       "Asp_mm2": 397.1130193770178,
       "n_bars": 3,
@@ -322,8 +322,8 @@
     "python_results": {
       "phiMn_kNm": 72.39586831068537,
       "flexure_DCR": 0.9064743821894873,
-      "phiVn_kN": 117.7643521427442,
-      "shear_DCR": 0.44580553490723446,
+      "phiVn_kN": 116.44699451547504,
+      "shear_DCR": 0.450848905276152,
       "As_mm2": 595.6695290655267,
       "Asp_mm2": 397.1130193770178,
       "n_bars": 3,
@@ -365,8 +365,8 @@
     "python_results": {
       "phiMn_kNm": 94.42393755918829,
       "flexure_DCR": 0.7942901126421181,
-      "phiVn_kN": 117.7643521427442,
-      "shear_DCR": 0.5094920398939822,
+      "phiVn_kN": 117.14075294589179,
+      "shear_DCR": 0.5122043225017895,
       "As_mm2": 794.2260387540356,
       "Asp_mm2": 397.1130193770178,
       "n_bars": 4,
@@ -408,8 +408,8 @@
     "python_results": {
       "phiMn_kNm": 94.42393755918829,
       "flexure_DCR": 0.893576376722383,
-      "phiVn_kN": 117.7643521427442,
-      "shear_DCR": 0.5731785448807301,
+      "phiVn_kN": 117.14075294589179,
+      "shear_DCR": 0.5762298628145132,
       "As_mm2": 794.2260387540356,
       "Asp_mm2": 397.1130193770178,
       "n_bars": 4,

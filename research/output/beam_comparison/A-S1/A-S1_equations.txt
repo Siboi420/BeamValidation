@@ -7,20 +7,20 @@
 
   2. A_s,min (Minimum reinforcement)
      A_s,min1 = 0.25*sqrt(f_c')/f_y * b * d
-              = 0.25*sqrt(28.0)/420.0 * 300.0 * 639.40 = 604.176 mm2
+              = 0.25*sqrt(28.0)/420.0 * 300.0 * 636.20 = 601.152 mm2
      A_s,min2 = 1.4/f_y * b * d
-              = 1.4/420.0 * 300.0 * 639.40 = 639.400 mm2
-     A_s,min  = max(604.176, 639.400) = 639.400 mm2
+              = 1.4/420.0 * 300.0 * 636.20 = 636.200 mm2
+     A_s,min  = max(601.152, 636.200) = 636.200 mm2
 
   3. A_s,max (Maximum reinforcement)
      A_s,bal = 0.85*f_c'*beta_1*(eps_cu/(eps_cu+eps_y))*d
-             = 0.85*28.0*0.850*(0.003/(0.003+0.00210))*639.40
-             = 7608.860 mm2
-     A_s,max = 0.75*A_s,bal = 0.75*7608.860 = 5706.645 mm2
+             = 0.85*28.0*0.850*(0.003/(0.003+0.00210))*636.20
+             = 7570.780 mm2
+     A_s,max = 0.75*A_s,bal = 0.75*7570.780 = 5678.085 mm2
 
   4. Effective depths
-     d   = h - p - dt - dl/2 = 700.0 - 40.0 - 9.5 - 22.2/2 = 639.40 mm
-     d'  = p + dt + dl/2 = 40.0 + 9.5 + 22.2/2 = 60.60 mm
+     d   = h - p - dt - dl/2 = 700.0 - 40.0 - 12.7 - 22.2/2 = 636.20 mm
+     d'  = p + dt + dl/2 = 40.0 + 12.7 + 22.2/2 = 63.80 mm
 
   5. Neutral axis & stress block
      a   = solved from M_u/phi = 0.85*f_c'*b*a*(d-a/2)
@@ -34,12 +34,12 @@
      A_s = C_c / f_y = 487715.29 / 420.0 = 1161.227 mm2
 
   8. Nominal & design moment
-     M_n   = C_c*(d - a/2) = 487715.29*(639.40 - 68.31/2) = 295187862.00 N-mm
-     phiM_n  = phi*M_n = 0.90*295187862.00 = 265669075.80 N-mm
-            = 265.669 kN-m
+     M_n   = C_c*(d - a/2) = 487715.29*(636.20 - 68.31/2) = 293627173.06 N-mm
+     phiM_n  = phi*M_n = 0.90*293627173.06 = 264264455.75 N-mm
+            = 264.264 kN-m
 
   9. Demand-Capacity Ratio (DCR)
-     DCR  = M_u / phiM_n = 225.00 / 265.669 = 0.847
+     DCR  = M_u / phiM_n = 225.00 / 264.264 = 0.851
      -> DCR <= 1.0, section is ADEQUATE
 
   SHEAR CAPACITY (ACI 318-14)
@@ -47,23 +47,23 @@
   Applied shear force, V_u          = 150.00 kN
   Concrete shear strength, V_c
     V_c = 0.17*lambda*sqrt(f_c')*b_w*d
-        = 0.17*1.0*sqrt(28.0)*300.0*639.40 / 1000
-        = 172.553 kN
-  phiV_c = 0.75*172.553 = 129.415 kN
-  0.5*phiV_c = 64.707 kN
+        = 0.17*1.0*sqrt(28.0)*300.0*636.20 / 1000
+        = 171.689 kN
+  phiV_c = 0.75*171.689 = 128.767 kN
+  0.5*phiV_c = 64.383 kN
   Shear reinforcement required?     Yes
 
-  Stirrup area (2-leg O10mm), A_v = 2*(pi*9.52/4) = 141.76 mm2
-  Required V_s = V_u/phi - V_c = 150.00/0.75 - 172.553 = 27.447 kN
+  Stirrup area (2-leg O13mm), A_v = 2*(pi*12.72/4) = 253.35 mm2
+  Required V_s = V_u/phi - V_c = 150.00/0.75 - 171.689 = 28.311 kN
   Required spacing, s_req = A_v*f_yt*d / V_s
-                         = 141.76*280.0*639.40 / 27.447 / 1000
-                         = 924.7 mm
-  Max spacing (ACI 9.7.6.2.2), s_max = 319.7 mm
+                         = 253.35*280.0*636.20 / 28.311 / 1000
+                         = 1594.1 mm
+  Max spacing (ACI 9.7.6.2.2), s_max = 318.1 mm
   Final spacing, s = 310 mm
-  Actual V_s = A_v*f_yt*d / s = 141.76*280.0*639.40/310/1000 = 81.872 kN
+  Actual V_s = A_v*f_yt*d / s = 253.35*280.0*636.20/310/1000 = 145.585 kN
   Design shear strength, phiV_n
-    phiV_n = phi*(V_c + V_s) = 0.75*(172.553 + 81.872) = 190.819 kN
-  Shear DCR = V_u / phiV_n = 150.00 / 190.819 = 0.786
+    phiV_n = phi*(V_c + V_s) = 0.75*(171.689 + 145.585) = 237.956 kN
+  Shear DCR = V_u / phiV_n = 150.00 / 237.956 = 0.630
   -> Shear DCR <= 1.0, shear capacity is ADEQUATE
 
   DEFLECTION CHECK (ACI 318-14 Section 24.2)
@@ -78,16 +78,16 @@
   Modulus of rupture, fr             = 3.281 MPa
   Cracking moment, Mcr               = 80.378 kN-m
   Reinforcement ratio, rho           = 0.0061
-  Neutral axis factor, k             = 0.2671
-  Neutral axis depth, kd             = 170.80 mm
-  Cracked moment of inertia, Icr     = 2548839523.3 mm4
-  Effective moment of inertia, Ie    = 6841470280.7 mm4
+  Neutral axis factor, k             = 0.2677
+  Neutral axis depth, kd             = 170.31 mm
+  Cracked moment of inertia, Icr     = 2520914360.8 mm4
+  Effective moment of inertia, Ie    = 6833437122.8 mm4
 
-  Immediate deflection, delta_i      = 1.98 mm
-  Long-term factor, lambda_delta     = 1.664
+  Immediate deflection, delta_i      = 1.99 mm
+  Long-term factor, lambda_delta     = 1.663
   Long-term deflection, delta_lt     = 3.30 mm
-  Total deflection, delta_total      = 5.28 mm
+  Total deflection, delta_total      = 5.29 mm
   Allowable deflection (L/240)       = 25.00 mm
-  -> Deflection ADEQUATE (delta_total=5.28 mm <= 25.00 mm)
+  -> Deflection ADEQUATE (delta_total=5.29 mm <= 25.00 mm)
 
 ====================================================

@@ -1,7 +1,7 @@
 ====================================================================================================
   RC BEAM COMPARISON BENCHMARK — PYTHON vs COMMERCIAL SOFTWARE
 ====================================================================================================
-  Generated: 2026-06-01 21:58:03
+  Generated: 2026-06-06 23:10:17
   Code Standard: ACI 318-14
   Engine: RCBeam_moment_capacity.py (Python)
   Total Cases: 10
@@ -16,23 +16,23 @@
 ----------------------------------------------------------------------------------------------------
   Case     Load                 w       Mu       Vu        φMn      DCR      φVn    V_DCR      s       As      As' Status  
   -------- -------------- ------- -------- -------- ---------- -------- -------- -------- ------ -------- -------- --------
-  A-S1     w=50.0 kN/m      50.00    225.0    150.0      265.7    0.847    190.8    0.786    310     1161      774 ✅       
-  A-S2     w=57.5 kN/m      57.50    258.8    172.5      265.7    0.974    190.8    0.904    310     1161      774 ✅       
-  A-S3     w=65.0 kN/m      65.00    292.5    195.0      347.6    0.842    195.1    1.000    290     1548      774 ✅       
-  A-S4     w=72.5 kN/m      72.50    326.2    217.5      347.6    0.939    220.1    0.988    210     1548      774 ✅       
-  A-S5     w=80.0 kN/m      80.00    360.0    240.0      426.1    0.845    241.4    0.994    170     1935      774 ✅       
+  A-S1     w=50.0 kN/m      50.00    225.0    150.0      264.3    0.851    243.4    0.616    310     1161      774 ✅       
+  A-S2     w=57.5 kN/m      57.50    258.8    172.5      264.3    0.979    243.4    0.709    310     1161      774 ✅       
+  A-S3     w=65.0 kN/m      65.00    292.5    195.0      345.7    0.846    247.8    0.787    310     1548      774 ✅       
+  A-S4     w=72.5 kN/m      72.50    326.2    217.5      345.7    0.944    247.8    0.878    310     1548      774 ✅       
+  A-S5     w=80.0 kN/m      80.00    360.0    240.0      423.8    0.849    252.1    0.952    310     1935      774 ✅       
 
   ────────────────────────────────────────────────────────────────────────────────────────────────────
   KEY DESIGN PARAMETERS FOR Type-A: Simply Supported Floor Beam
   ────────────────────────────────────────────────────────────────────────────────────────────────────
   Design level (Step 3):
     M_u = 292.5 kN-m,  V_u = 195.0 kN
-    Effective depth d = 639.4 mm
+    Effective depth d = 636.2 mm
     Tension steel: 4 × Ø22.2 mm bars
     Compression steel: 2 × Ø22.2 mm bars
-    Stirrups: Ø9.5 mm @ 290 mm
-    Ie/Ig ratio: 0.820
-    Total deflection: 5.14 mm (allow 25.00 mm)
+    Stirrups: Ø12.7 mm @ 310 mm
+    Ie/Ig ratio: 0.818
+    Total deflection: 5.15 mm (allow 25.00 mm)
     Deflection status: ✅ ADEQUATE
 
   RECOMMENDED REINFORCEMENT FOR COMMERCIAL SOFTWARE COMPARISON:
@@ -54,11 +54,11 @@
 ----------------------------------------------------------------------------------------------------
   Case     Load                 w       Mu       Vu        φMn      DCR      φVn    V_DCR      s       As      As' Status  
   -------- -------------- ------- -------- -------- ---------- -------- -------- -------- ------ -------- -------- --------
-  C-S1     w=15.0 kN/m      15.00     46.9     37.5       49.3    0.951    117.8    0.318    170      397      397 ✅       
-  C-S2     w=18.0 kN/m      18.00     56.2     45.0       72.4    0.777    117.8    0.382    170      596      397 ✅       
-  C-S3     w=21.0 kN/m      21.00     65.6     52.5       72.4    0.906    117.8    0.446    170      596      397 ✅       
-  C-S4     w=24.0 kN/m      24.00     75.0     60.0       94.4    0.794    117.8    0.509    170      794      397 ✅       
-  C-S5     w=27.0 kN/m      27.00     84.4     67.5       94.4    0.894    117.8    0.573    170      794      397 ✅       
+  C-S1     w=15.0 kN/m      15.00     46.9     37.5       49.3    0.951    115.8    0.324    170      397      397 ✅       
+  C-S2     w=18.0 kN/m      18.00     56.2     45.0       72.4    0.777    116.4    0.386    170      596      397 ✅       
+  C-S3     w=21.0 kN/m      21.00     65.6     52.5       72.4    0.906    116.4    0.451    170      596      397 ✅       
+  C-S4     w=24.0 kN/m      24.00     75.0     60.0       94.4    0.794    117.1    0.512    170      794      397 ✅       
+  C-S5     w=27.0 kN/m      27.00     84.4     67.5       94.4    0.894    117.1    0.576    170      794      397 ✅       
 
   ────────────────────────────────────────────────────────────────────────────────────────────────────
   KEY DESIGN PARAMETERS FOR Type-C: Cantilever Balcony Beam
@@ -118,7 +118,7 @@
 
   E. CSV columns to fill:
      - Commercial_phiMn_kNm — Enter SPBeam moment capacity
-     - Commercial_DCR — Enter SPBeam demand-capacity ratio
+     - Commercial_phiVn_at_d_kN — Enter SPBeam shear capacity at critical section (distance d from support)
      - Commercial_As_mm2 — Enter required tension steel area
      - Commercial_Asp_mm2 — Enter required compression steel area
      - Commercial_stirrup_spacing_mm — Enter stirrup spacing

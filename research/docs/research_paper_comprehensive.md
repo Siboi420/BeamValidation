@@ -179,23 +179,6 @@ If V_s > 0.33√(f'c) × b_w × d:    s_max = min(d/4, 150 mm)
 Otherwise:                          s_max = min(d/2, 600 mm)
 ```
 
-#### 3.2.3 Deflection Checks (Section 24.2)
-
-The effective moment of inertia is computed using Branson's formula (Eq. 24.2.3.5a):
-```
-I_e = (M_cr/M_a)³ × I_g + [1 - (M_cr/M_a)³] × I_cr    for M_a > M_cr
-```
-
-Immediate deflection (simply supported, uniform load):
-```
-Δ_immediate = 5wL⁴/(384E_cI_e)
-```
-
-Total deflection includes long-term effects (creep and shrinkage):
-```
-Δ_total = Δ_immediate × (1 + λ_Δ)
-λ_Δ = ξ / (1 + 50ρ')    with ξ = 2.0 for sustained loads > 5 years
-```
 
 ### 3.3 Interactive Web Application
 
@@ -332,7 +315,7 @@ $$V_c = \left[0.16\lambda\sqrt{f'_c} + 17\rho_w\frac{V_u d}{M_u}\right]b_w d \le
 
 ### 5.2 SPBeam Verification Results
 
-The same beam configurations were modeled in SPBeam v8.14 with identical material properties and UDL loading. A comparison summary script (`research/scripts/beam_comparison_summary.py`) reads the benchmark CSV and generates side-by-side statistics and scatter plots.
+The same beam configurations were modeled in SPBeam v8.14 with identical material properties and UDL loading. A comparison summary script (`research/scripts/beam_comparison_summary.py`) reads the benchmark CSV and enerates side-by-side statistics and scatter plots.
 
 **Table 5: Python vs SPBeam — Per-Case Comparison**
 
