@@ -11,23 +11,16 @@ References:
 
 import numpy as np
 import matplotlib.pyplot as plt
-import os
+import os, sys, argparse, yaml
 
 
 # ============================================================================
-#  BEAM DEFINITIONS
+#  BEAM DEFINITIONS — read from project YAML or use hardcoded fallback
 # ============================================================================
-# Add/remove entries as needed. Each beam must have a unique name.
-#
-# Parameters:
-#   name, b, h, p, dl, dt, f_c, f_yl, f_yt, M_ue, V_ue  (required)
-#   A_s_provided, A_sp_provided                           (optional — override)
-#
-# If A_s_provided is set, the script will use that steel area and compute
-# the actual moment capacity (phiM_n_actual) based on it, rather than
-# calculating the required steel from the design moment.
+# Hardcoded fallback (kept for backward compatibility when --project is not used).
+# When --project <name> is passed, data is read from projects/<name>/input.yaml.
 
-beams = [
+DEFAULT_BEAMS = [
     {
         "name": "B-1",
         "b": 400.0,      # width (mm)
@@ -45,8 +38,46 @@ beams = [
         # "A_s_provided": 1600.0,   # optional: override tension steel (mm2)
         # "A_sp_provided": 400.0,   # optional: override compression steel (mm2)
     },
-
 ]
+
+
+def load_beams_from_project(project_name):
+    """Read beam data from projects/<name>/input.yaml."""
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    yaml_path = os.path.join(script_dir, "..", "projects", project_name, "input.yaml")
+    if not os.path.exists(yaml_path):
+        print(f"  Error: project '{project_name}' not found at {yaml_path}")
+        sys.exit(1)
+    with open(yaml_path) as f:
+        data = yaml.safe_load(f)
+
+    raw = data.get("beams", [])
+    beams_out = []
+    for b in raw:
+        beams_out.append({
+            "name": b["name"],
+            "b": float(b.get("b", 300)),
+            "h": float(b.get("h", 500)),
+            "p": float(b.get("cover", 40)),
+            "dl": float(b.get("dl", 16)),
+            "dt": float(b.get("dt", 10)),
+            "f_c": float(b.get("fc", 30)),
+            "f_yl": float(b.get("fy", 420)),
+            "f_yt": float(b.get("fyv", 240)),
+            "M_ue": float(b.get("Mu", 100)),
+            "V_ue": float(b.get("Vu", 50)),
+            "L_span": float(b.get("L", 6.0)),
+            "w_service": float(b.get("w_service", 25.0)),
+        })
+    return beams_out
+
+
+def get_project_output_dir(project_name):
+    """Return projects/<name>/output/beams/."""
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    out = os.path.join(script_dir, "..", "projects", project_name, "output", "beams")
+    os.makedirs(out, exist_ok=True)
+    return out
 
 # ============================================================================
 #  CONSTANTS
@@ -906,15 +937,26 @@ def print_summary(r):
 # ============================================================================
 
 if __name__ == "__main__":
-    output_dir = os.path.join(os.path.dirname(__file__), "..", "output", "beam_design")
+    parser = argparse.ArgumentParser(description="RC Beam Design — ACI 318-14")
+    parser.add_argument("--project", default=None, help="Project name (reads from projects/<name>/input.yaml)")
+    args = parser.parse_args()
+
+    if args.project:
+        beam_list = load_beams_from_project(args.project)
+        output_dir = get_project_output_dir(args.project)
+    else:
+        beam_list = DEFAULT_BEAMS
+        output_dir = os.path.join(os.path.dirname(__file__), "..", "output", "beam_design")
     os.makedirs(output_dir, exist_ok=True)
 
     print("=" * 60)
     print("  RC BEAM DESIGN — ACI 318-14")
-    print(f"  Running {len(beams)} beam(s)...")
+    print(f"  Running {len(beam_list)} beam(s)...")
+    if args.project:
+        print(f"  Project: {args.project}")
     print("=" * 60)
 
-    for beam in beams:
+    for beam in beam_list:
         print(f"\n  >>> Designing {beam['name']} ({beam['b']:.0f}x{beam['h']:.0f} mm) ...")
         results = design_beam(**beam)
         save_equations(results, output_dir)
