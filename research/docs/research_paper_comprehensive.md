@@ -226,10 +226,12 @@ The flexural database includes 18 NAC beams with a wide range of parameters:
 
 Key observations:
 
-**Figure 8: Flexural Validation Scatter — ACI vs EC2 vs Experimental**
+**Figure 1: Flexural Validation Scatter — ACI vs EC2 vs Experimental**
+
 ![Flexure Validation Scatter](../output/nac_validation/flexure_scatter.png)
 
-**Figure 9: Flexural Validation — Grouped Bar Chart**
+**Figure 2: Flexural Validation — Grouped Bar Chart**
+
 ![Flexure Validation Bar](../output/nac_validation/flexure_bar.png)
 
 - **ACI 318-14 nominal predictions** show excellent accuracy with a mean model factor of 1.109 and the lowest coefficient of variation (5.85%) among all three methods. This indicates that ACI 318-14 provides consistent, slightly conservative predictions across a wide range of beam parameters.
@@ -255,16 +257,20 @@ The shear database includes 24 beams without stirrups and 8 beams with stirrups.
 
 Key observations:
 
-**Figure 10: Shear Validation (No Stirrups) Scatter**
+**Figure 3: Shear Validation (No Stirrups) Scatter**
+
 ![Shear No Stirrups Scatter](../output/nac_validation/shear_no_stirrups_scatter.png)
 
-**Figure 11: Shear Validation (No Stirrups) — Grouped Bar Chart**
+**Figure 4: Shear Validation (No Stirrups) — Grouped Bar Chart**
+
 ![Shear No Stirrups Bar](../output/nac_validation/shear_no_stirrups_bar.png)
 
-**Figure 12: Shear Validation (With Stirrups) Scatter**
+**Figure 5: Shear Validation (With Stirrups) Scatter**
+
 ![Shear With Stirrups Scatter](../output/nac_validation/shear_with_stirrups_scatter.png)
 
-**Figure 13: Shear Validation (With Stirrups) — Grouped Bar Chart**
+**Figure 6: Shear Validation (With Stirrups) — Grouped Bar Chart**
+
 ![Shear With Stirrups Bar](../output/nac_validation/shear_with_stirrups_bar.png)
 
 - **Shear without stirrups:** ACI 318-14 is very conservative (mean = 1.368) with high scatter (CoV = 26.07%). The large scatter reflects the inherent variability in shear behavior and the simplified nature of the ACI 318-14 shear equation (V_c = 0.17√f'c × b_w × d).
@@ -341,17 +347,20 @@ The same beam configurations were modeled in SPBeam v8.14 with identical materia
 | φV_n@d | 1.008 | 2.2% | 0.950 | 3.6% | ✅ Good (A) / ⚠️ Fair (C) |
 | Stirrup s | 1.051 | 0.0% | 1.104 | 6.1% | ✅ Good (A) / ⚠️ Fair (C) |
 
-**Figure 5: Flexural Capacity Scatter**
+**Figure 7: Flexural Capacity Scatter**
+
 ![Flexural Capacity Scatter](../output/beam_comparison/comparison_plots/scatter_phiMn.png)
 
 The flexural capacity comparison shows near-perfect agreement. All 10 points lie within the ±5% bands, with a mean ratio of 1.003 (Type-A) and 1.008 (Type-C). The slightly higher Python values (0.3–0.8%) reflect minor differences in the effective depth calculation from discrete bar arrangement.
 
-**Figure 6: Shear Capacity Scatter**
+**Figure 8: Shear Capacity Scatter**
+
 ![Shear Capacity Scatter](../output/beam_comparison/comparison_plots/scatter_phiVn.png)
 
 Type-A shear capacity shows excellent agreement (mean ratio = 1.008, CoV = 2.2%) after implementing the detailed V_c equation. Type-C shows a larger spread (mean ratio = 0.950, CoV = 3.6%), with SPBeam consistently reporting 4–12% higher φV_n for cantilevers. This offset is primarily at the lowest load step (C-S1, DCR = 0.324) where minimum shear reinforcement governs, and converges to 4% at higher loads.
 
-**Figure 7: Python vs SPBeam — All Parameters**
+**Figure 9: Python vs SPBeam — All Parameters**
+
 ![Python vs SPBeam Bar Chart](../output/beam_comparison/comparison_plots/comparison_bars.png)
 
 The grouped bar chart provides a visual side-by-side comparison of all four design outputs across the 10 design cases, confirming the strong agreement in flexural parameters and the consistent offset in stirrup spacing (Python = 310 mm vs SPBeam = 295 mm for all Type-A cases).
@@ -399,22 +408,26 @@ All 18 combinations use the capacity-check mode with A_s = ρ × b × d and sing
 
 ### 6.3 Discussion of Parametric Trends
 
-**Figure 1: φM_n vs ρ**
+**Figure 10: φM_n vs ρ**
+
 ![Flexural Capacity vs Reinforcement Ratio](../output/parametric_study/phiMn_vs_rho.png)
 
 Flexural capacity increases approximately linearly with reinforcement ratio. At ρ = 0.5%, all beams are inadequate (DCR > 1.0). The effect of concrete strength on capacity is significant at high ρ ratios but minimal at low ρ ratios—at ρ = 2.5%, increasing f_c from 20 to 60 MPa increases capacity by 30%, while at ρ = 0.5% the increase is only 4%.
 
-**Figure 2: DCR vs ρ**
+**Figure 11: DCR vs ρ**
+
 ![DCR vs Reinforcement Ratio](../output/parametric_study/DCR_vs_rho.png)
 
 The DCR drops sharply from >1.29 at ρ = 0.5% to <0.69 at ρ = 1.0%, then decreases more gradually. The transition point (ρ ≈ 0.8%) marks the boundary between inadequate and adequate designs.
 
-**Figure 3: I_e/I_g vs ρ**
+**Figure 12: I_e/I_g vs ρ**
+
 ![Ie/Ig vs Reinforcement Ratio](../output/parametric_study/IeIg_vs_rho.png)
 
 The effective stiffness ratio I_e/I_g increases from approximately 0.29 at ρ = 0.5% to 0.89 at ρ = 2.5% for f_c = 20 MPa. This is because higher reinforcement ratios increase the cracked moment of inertia I_cr, which brings I_e closer to I_g. Higher concrete strength reduces I_e/I_g at the same ρ because the modular ratio n = E_s/E_c decreases.
 
-**Figure 4: Deflection vs ρ**
+**Figure 13: Deflection vs ρ**
+
 ![Deflection vs Reinforcement Ratio](../output/parametric_study/deflection_vs_rho.png)
 
 Total deflection decreases with increasing ρ, driven by the increase in I_e/I_g. At ρ = 0.5%, deflection is 68 mm—nearly 3× the allowable limit of 25 mm (L/240). At ρ ≥ 1.5%, deflection falls below the allowable limit for all concrete strengths. The deflection reduction from increasing ρ is most pronounced at low reinforcement ratios, where the section transitions from heavily cracked to moderately cracked.
