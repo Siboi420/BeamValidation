@@ -11,7 +11,9 @@ References:
 
 import numpy as np
 import matplotlib.pyplot as plt
-import os, sys, argparse, yaml
+import os
+import sys
+import argparse
 
 
 # ============================================================================
@@ -43,6 +45,7 @@ DEFAULT_BEAMS = [
 
 def load_beams_from_project(project_name):
     """Read beam data from projects/<name>/input.yaml."""
+    import yaml  # local import — only needed for this function
     script_dir = os.path.dirname(os.path.abspath(__file__))
     yaml_path = os.path.join(script_dir, "..", "projects", project_name, "input.yaml")
     if not os.path.exists(yaml_path):
